@@ -56,7 +56,7 @@
 									<span class="helper-text"><i class="fa fa-lock"></i> <a href="#">Forgot password?</a></span>
 								</div>
 							</form>
-							<p class="text-center text-danger">
+							<p class="text-center text-danger bg-warning">
 								<?php
 									if(isset($_SESSION['loginErro'])){
 
