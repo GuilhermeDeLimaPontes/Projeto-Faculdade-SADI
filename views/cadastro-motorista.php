@@ -7,38 +7,41 @@
 			<div class="main-content">
 				<div class="container-fluid">
 					<h3 class="page-title">Elements</h3>
+					<p class="lead text-center text-primary pt-2 pb-2">
+								<?php
+									if(isset($_SESSION['emailJaCadastrado'])){
+
+										echo $_SESSION['emailJaCadastrado'];
+										unset($_SESSION['emailJaCadastrado']);
+
+									}else if(isset($_SESSION['success'])){
+										echo $_SESSION['success'];
+										unset($_SESSION['success']);
+									}
+								?>
+					</p>
 					<div class="row">
 						<div class="col-md-12">
-							<!-- BUTTONS -->
-							
-							
-							<!-- END BUTTONS -->
-							<!-- INPUTS -->
-							<form action="" method="POST">
+							<form action="../controllers/motorista/cadastro.php" method="POST">
 							<div class="panel">
 								<div class="panel-heading">
 									<h3 class="panel-title">Cadastro de Motorista</h3>
 								</div>
 								<div class="panel-body">
 									<label class="">Nome Completo</label>
-									<input type="text" class="form-control" placeholder="text field">
+									<input type="text" name="nome" class="form-control" placeholder="Insira seu nome" required>
 									<br>
 									<label class="">Email</label>
-									<input type="email" class="form-control" value="">
+									<input type="email" name="email" class="form-control" placeholder="Insira seu Email" value="" required>
 									<br>
 									<label class="">Senha</label>
 									<br>
-									<input type="password"  class="form-control" name="senha" required>
+									<input type="password" name="senha"  class="form-control" placeholder="**********"  required>
 									<br>
 									<button class="btn btn-success btn-block">Enviar</button>
 								</div>
 							</div>
-							</form>
-							<!-- END INPUTS -->
-							<!-- INPUT SIZING -->
-							
-							<!-- END INPUT SIZING -->
-						
+							</form>	
 					</div>
 				</div>
 			</div>

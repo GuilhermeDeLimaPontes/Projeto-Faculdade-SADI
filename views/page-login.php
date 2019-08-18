@@ -39,11 +39,11 @@
 							<form class="form-auth-small" action="../controllers/AuthLogin.php" method="POST">
 								<div class="form-group">
 									<label for="signin-email" class="control-label sr-only">Email</label>
-									<input type="" class="form-control" name="email" id="signin-email" value="" placeholder="Email">
+									<input type="email" class="form-control" name="email" id="signin-email" value="" placeholder="Email" required>
 								</div>
 								<div class="form-group">
 									<label for="signin-password" class="control-label sr-only">Password</label>
-									<input type="password" class="form-control" name="password" id="signin-password" value="" placeholder="Password">
+									<input type="password" class="form-control" name="password" id="signin-password" value="" placeholder="Password" required>
 								</div>
 								<div class="form-group clearfix">
 									<label class="fancy-checkbox element-left">
@@ -56,7 +56,7 @@
 									<span class="helper-text"><i class="fa fa-lock"></i> <a href="#">Forgot password?</a></span>
 								</div>
 							</form>
-							<p class="text-center text-danger bg-warning">
+							<span class="lead text-center text-danger pt-2 pb-2">
 								<?php
 									if(isset($_SESSION['loginErro'])){
 
@@ -64,7 +64,7 @@
 										unset($_SESSION['loginErro']);
 									}
 								?>
-							</p>
+							</span>
 						</div>
 					</div>
 					<div class="right">
