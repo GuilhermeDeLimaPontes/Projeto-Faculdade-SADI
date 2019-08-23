@@ -77,6 +77,15 @@ class Motorista extends Conexao
         }
     }
 
+    public function listar()
+    {
+        $sql = "SELECT IDMOTORISTA, NOME, EMAIL FROM MOTORISTA";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $results;
+    }
+
 
 }
 ?>
