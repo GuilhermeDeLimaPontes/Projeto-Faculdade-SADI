@@ -1,5 +1,6 @@
 		<?php
 			require_once 'header.php';
+			require_once '../classes/Motorista.php';
 		?>
 		<!-- MAIN -->
 	<div class="main">
@@ -12,150 +13,179 @@
 							<!-- BUTTONS -->
 							<!-- END BUTTONS -->
 							<!-- INPUTS -->
-						<form action="" method="POST">
+						<form action="../controllers/relatorio/cadastro.php" method="POST">
 							<div class="panel">
 								<div class="panel-heading">
-										<h3 class="panel-title">Cadastro de Relatório</h3>
-									</div>
-									<div class="panel-body">
-										
-										<div class="row">
-						<div class="col-md-12">
-							
-							  <div class="form-row">
-							    <div class="form-group col-md-12">
-							      <label for="NomePaciente">Nome do Solicitante</label>
-							      <input type="text" name="NomePaciente" class="form-control" id="NomePaciente" placeholder="Nome">
-							    </div>
-							  </div>
-
-							  <div class="form-row">
-							    <div class="form-group col-md-4">
-							      <label for="NomePaciente">Data do Fato</label>
-							      <input type="date" name="NomePaciente" class="form-control" id="NomePaciente" placeholder="Nome">
-							    </div>
-							    <div class="form-group col-md-4">
-							      <label for="RG">Hora da Comunicação</label>
-							      <input type="time" name="rg" class="form-control" id="RG" placeholder="RG">
-							    </div>
-							    <div class="form-group col-md-4">
-
-							  		<label for="">Como Foi Solicitado o atendimento </label>
-							  		<label class="form control radio-inline"><input type="radio" name="optradio" checked>Via Central</label>
-									<label class="form control radio-inline"><input type="radio" name="optradio">Diretamente</label>
-									<label class="form control radio-inline"><input type="radio" name="optradio">Deparou</label>
-							  	</div>
-							  </div>
-
-							  <div class="form-row">
-							    <div class="form-group col-md-8">
-							      <label for="NomePaciente">Natureza da Ocorrência</label>
-							      <input type="text" name="NomePaciente" class="form-control" id="NomePaciente" placeholder="Nome">
-							    </div>
-							    <div class="form-group col-md-2">
-							      <label for="RG">Prefixo da AMB</label>
-							      <input type="text" name="rg" class="form-control" id="RG" placeholder="RG">
-							    </div>
-								<div class="form-group col-md-2">
-							      <label for="RG">RA Nº</label>
-							      <input type="text" name="rg" class="form-control" id="RG" placeholder="RG">
-							    </div>
-							  </div>
-
-							  <div class="form-row">
-							    <div class="form-group col-md-2">
-							      <label for="NomePaciente">KM inicial</label>
-							      <input type="text" name="NomePaciente" class="form-control" id="NomePaciente" placeholder="Nome">
-							    </div>
-							    <div class="form-group col-md-2">
-							      <label for="RG">KM FINAL</label>
-							      <input type="text" name="rg" class="form-control" id="RG" placeholder="RG">
-							    </div>
-								<div class="form-group col-md-2">
-							      <label for="RG">KM RODADO</label>
-							      <input type="text" name="rg" class="form-control" id="RG" placeholder="RG">
-							    </div>
-								<div class="form-group col-md-2">
-							      <label for="RG">HORA DO FATO</label>
-							      <input type="time" name="rg" class="form-control" id="RG" placeholder="RG">
-							    </div>
-								<div class="form-group col-md-2">
-							      <label for="RG">HORA LOCAL</label>
-							      <input type="time" name="rg" class="form-control" id="RG" placeholder="RG">
-							    </div>
-								<div class="form-group col-md-2">
-							      <label for="RG">HORA FINAL</label>
-							      <input type="time" name="rg" class="form-control" id="RG" placeholder="RG">
-							    </div>
-							  </div>
-
-							  <div class="form-row">
-							    <div class="form-group col-md-8">
-							      <label for="NomePaciente">Nome do Paciente</label>
-							      <input type="text" name="NomePaciente" class="form-control" id="NomePaciente" placeholder="Nome">
-							    </div>
-							    <div class="form-group col-md-4">
-							      <label for="RG">RG</label>
-							      <input type="text" name="rg" class="form-control" id="RG" placeholder="RG">
-							    </div>
-							  </div>
-
-							  <div class="form-row">
-								    <div class="form-group col-md-4">
-								      <label for="Cartão SUS">Cartão SUS</label>
-								      <input type="text" class="form-control" id="Cartão SUS">
-								    </div>
-								   <div class="form-check form-inline col-md-4">
-										<label for="inputEmail4">Sexo</label>
-											<label class="fancy-radio">
-												<input id="sexo" name="sexo" value="Masculino" type="radio">
-												<span><i></i>Masculino</span>
-											</label>
-											<label class="fancy-radio">
-												<input id="sexo" name="sexo" value="Feminino" type="radio">
-												<span><i></i>Feminino</span>
-											</label>
-									</div>
-								    <div class="form-group col-md-4">
-								      <label for="inputCEP">Data de Nascimento</label>
-								      <input type="date" name="bairro" class="form-control" id="BAIRRO">
-								    </div>
-							  </div>
-
-							  <div class="form-group col-md-12">
-							    <label for="inputAddress">Endereço</label>
-							    <input type="text" class="form-control" id="inputAddress" placeholder="Rua dos Bobos, nº 0">
-							  </div>
-
-							  <div class="form-row">
-							    <div class="form-group col-md-6">
-							      <label for="inputCity">Cidade</label>
-							      <input type="text" class="form-control" id="inputCity">
-							    </div>
-							    <div class="form-group col-md-4">
-							      <label for="inputEstado">Estado</label>
-							      <select id="inputEstado" class="form-control">
-							        <option selected>Escolher...</option>
-							        <option value="SP">SP</option>
-							      </select>
-							    </div>
-							    <div class="form-group col-md-2">
-							      <label for="inputCEP">BAIRRO</label>
-							      <input type="text" name="bairro" class="form-control" id="BAIRRO">
-							    </div>
-							  </div>
-
-							  <div class="form-group col-md-12">
-  								<label for="comment">Observação</label>
- 								<textarea class="form-control" rows="5" id="comment"></textarea>
-							  </div>
-						</div>
-				</div>
-											  				  
-									</div>
+									<h3 class="panel-title">Cadastro de Relatório</h3>
 								</div>
-								<button class="btn btn-success btn-block">Enviar</button>
-							</form>
+							<div class="panel-body">
+										
+								<div class="row">
+									<div class="col-md-12">
+										
+										  <div class="form-row">
+										    <div class="form-group col-md-12">
+										      <label for="NomeSolicitante">Nome do Solicitante</label>
+										      <input type="text" name="NomeSolicitante" class="form-control" id="NomeSolicitante" placeholder="Nome Do Solicitante" required>
+										    </div>
+										  </div>
+
+										  <div class="form-row">
+										    <div class="form-group col-md-4">
+										      <label for="dataFato">Data do Fato</label>
+										      <input type="date" name="dataFato" class="form-control" id="dataFato" max="2099-12-25">
+										    </div>
+										    <div class="form-group col-md-4">
+										      <label for="HoraComunicacao">Hora da Comunicação</label>
+										      <input type="time" name="HoraComunicacao" class="form-control" id="RG">
+										    </div>
+										    <div class="form-group col-md-4">
+
+										  		<label for="">Como Foi Solicitado o atendimento </label>
+										  		<label class="form control radio-inline"><input type="radio" name="solicitamento" value="VIA CENTRAL" checked>Via Central</label>
+												<label class="form control radio-inline"><input type="radio" name="solicitamento" value="DIRETAMENTE">Diretamente</label>
+												<label class="form control radio-inline"><input type="radio" name="solicitamento" value="DEPAROU">Deparou</label>
+										  	</div>
+										  </div>
+
+										  <div class="form-row">
+										    <div class="form-group col-md-8">
+										      <label for="naturezaOcorrencia">Natureza da Ocorrência</label>
+										      <input type="text" name="naturezaOcorrencia" class="form-control" id="naturezaOcorrencia" placeholder="Natureza da Ocorrência">
+										    </div>
+										    <div class="form-group col-md-2">
+										      <label for="amb">Prefixo da AMB</label>
+										      <input type="text" name="amb" class="form-control" id="amb" placeholder="Prefixo da AMB">
+										    </div>
+											<div class="form-group col-md-2">
+										      <label for="RA">RA Nº</label>
+										      <input type="text" name="RA" class="form-control" id="RA" placeholder="RA">
+										    </div>
+										  </div>
+
+										  <div class="form-row">
+										    <div class="form-group col-md-2">
+										      <label for="kmInicial">KM inicial</label>
+										      <input type="text" name="kmInicial" class="form-control" id="kmInicial">
+										    </div>
+										    <div class="form-group col-md-2">
+										      <label for="kmFinal">KM FINAL</label>
+										      <input type="text" name="kmFinal" class="form-control" id="kmFinal" >
+										    </div>
+											<div class="form-group col-md-2">
+										      <label for="kmRodado">KM RODADO</label>
+										      <input type="text" name="kmRodado" class="form-control" id="kmRodado" >
+										    </div>
+											<div class="form-group col-md-2">
+										      <label for="horaFato">HORA DO FATO</label>
+										      <input type="time" name="horaFato" class="form-control" id="horaFato" >
+										    </div>
+											<div class="form-group col-md-2">
+										      <label for="horaLocal">HORA LOCAL</label>
+										      <input type="time" name="horaLocal" class="form-control" id="horaLocal" >
+										    </div>
+											<div class="form-group col-md-2">
+										      <label for="horaFinal">HORA FINAL</label>
+										      <input type="time" name="horaFinal" class="form-control" id="horaFinal" >
+										    </div>
+										  </div>
+
+										  <div class="form-row">
+										    <div class="form-group col-md-8">
+										      <label for="NomePaciente">Nome do Paciente</label>
+										      <input type="text" name="NomePaciente" class="form-control" id="NomePaciente" placeholder="Nome">
+										    </div>
+										    <div class="form-group col-md-4">
+										      <label for="RG">RG</label>
+										      <input type="text" name="rg" class="form-control" id="RG" placeholder="RG">
+										    </div>
+										  </div>
+
+										  	<div class="form-row">
+											    <div class="form-group col-md-4">
+											      <label for="Cartão SUS">Cartão SUS</label>
+											      <input type="text" name="cartao_sus" class="form-control" id="Cartão SUS">
+												</div>
+											    <div class="form-check  col-md-4">
+													<label for="sexo">Sexo</label>
+														<label class="fancy-radio">
+															<input id="sexo" name="sexo" value="M" type="radio">
+															<span><i></i>Masculino</span>
+														</label>
+														<label class="fancy-radio">
+															<input id="sexo" name="sexo" value="F" type="radio">
+															<span><i></i>Feminino</span>
+														</label>
+												</div>
+											    <div class="form-group col-md-4">
+											      <label for="dataNascimento">Data de Nascimento</label>
+											      <input type="date" name="dataNascimento" class="form-control" id="dataNascimento">
+											    </div>
+										  	</div>
+										 <div class="form-row">
+											<div class="form-group col-md-10">
+												<label for="endereco">Endereço</label>
+												<input type="text" name="endereco" class="form-control" id="endereco" placeholder="Ex: Rua dos bobos">
+											</div>
+											<div class="form-group col-md-2">
+												<label for="numero">Número</label>
+												<input type="number" name="numero" class="form-control" id="numero" placeholder="numero">
+											</div>
+										 </div>	
+										  <div class="form-row">
+										    <div class="form-group col-md-6">
+										      <label for="cidade">Cidade</label>
+										      <input type="text" name="cidade" class="form-control" id="cidade">
+										    </div>
+										    <div class="form-group col-md-4">
+										      <label for="estado">Estado</label>
+										      <select id="estado" name="estado" class="form-control">
+										        <option selected>Escolher...</option>
+										        <option value="SP">SP</option>
+										      </select>
+										    </div>
+										    <div class="form-group col-md-2">
+										      <label for="bairro">BAIRRO</label>
+										      <input type="text" name="bairro" class="form-control" id="bairro">
+										    </div>
+										  </div>
+
+										  <div class="form-row">
+										    <div class="form-group col-md-8">
+										      <label for="Destino">Destino</label>
+										      <input type="text" name="destino" class="form-control" id="Destino" placeholder="Destino">
+										    </div>
+										    <div class="form-group col-md-4">
+										      <label for="Motorista">Motorista Responsavel pela Ocorrencia</label>
+										      <select id="motorista" name="motorista" class="form-control">
+										        <?php
+													$motorista = New Motorista();
+
+													$dados = $motorista->listarNomes();
+													 
+													for ($i=0; $i < count($dados) ; $i++) 
+													{ 
+														foreach ($dados[$i] as $k => $v) 
+														{
+															echo "<option>$v</option>";
+														}
+													}
+												?>
+										      </select>
+										    </div>
+										  </div>
+
+										  <div class="form-group col-md-12">
+			  								<label for="observacao">Observação</label>
+			 								<textarea class="form-control" name="observacao" rows="5" id="observacao"></textarea>
+										  </div>
+										  <button class="btn btn-success btn-block">Cadastrar</button>
+									</div>
+								</div>			  				  
+							</div>
+						</div>
+								
+						</form>
 							<!-- END INPUTS -->
 							<!-- INPUT SIZING -->
 							

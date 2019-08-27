@@ -86,6 +86,25 @@ class Motorista extends Conexao
         return $results;
     }
 
+    public function listarNomes()
+    {
+        $sql = "SELECT NOME FROM MOTORISTA";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $results;
+    }
+
+    public function editar($id)
+    {
+
+    }
+
+    public function excluir($id)
+    {
+
+    }
+
 
 }
 ?>
