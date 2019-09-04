@@ -1,17 +1,22 @@
 <?php
 	require_once '../classes/Motorista.php';
 
-	$email = addslashes($_POST['email']);
-	$senha = addslashes($_POST['password']);
-	
-	if(isset($email) && isset($senha))
+	if(isset($_POST['submit']))
 	{
-		$motorista = new Motorista();
-		$motorista->__set('email', $email);
-		$motorista->__set('senha', $senha);
-		$motorista->logarSistema();
-	}else{
-		header("location: ../views/page-login");
-		exit;
+		$email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_SPECIAL_CHARS);
+		$senha = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_SPECIAL_CHARS);
+	
+		if(isset($email) && isset($senha) && filter_var($email, FILTER_VALIDATE_EMAIL))
+		{
+			$motorista = new Motorista();
+			$motorista->__set('email', $email);
+			$motorista->__set('senha', $senha);
+			$motorista->logarSistema();
+		}else{
+			session_start();
+            $_SESSION['loginErro'] = "Login ou Senha Inválida";
+			header("location: ../views/page-login.php");
+			exit;
+		}
 	}
 ?>

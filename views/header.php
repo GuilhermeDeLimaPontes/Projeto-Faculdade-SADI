@@ -4,7 +4,7 @@
 			session_start();
 			if(!isset($_SESSION['IDMOTORISTA'])){ 
 				header("location: ../views/page-login.php");
-				exit;
+				exit;	
 			}
 				
 			
@@ -54,12 +54,16 @@
 				<div id="navbar-menu">
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="assets/img/user1.png" class="img-circle" alt="Avatar"> <span>Nome</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								<img src="assets/img/user1.png" class="img-circle" alt="Avatar"> 
+									<span> <?php echo $_SESSION['NOME'] ?></span> 
+									<i class="icon-submenu lnr lnr-chevron-down"></i>
+							</a>
 							<ul class="dropdown-menu">
 								<li><a href="#"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
 								<li><a href="#"><i class="lnr lnr-envelope"></i> <span>Message</span></a></li>
 								<li><a href="#"><i class="lnr lnr-cog"></i> <span>Settings</span></a></li>
-								<li><a href="../controllers/logout.php"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
+								<li><a href="../controllers/logout.php?logout=1"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
 							</ul>
 						</li>
 						
@@ -77,8 +81,8 @@
 						<li><a href="cadastro-relatorio.php" class=""><i class="lnr lnr-code"></i> <span>Registro de Atendimento</span></a></li>
 						<li><a href="cadastro-motorista.php" class=""><i class="lnr lnr-code"></i> <span>Cadastrar Motorista</span></a></li>
 						<li><a href="funcionarios.php" class=""><i class="lnr lnr-dice"></i> <span>Lista de Funcionários</span></a></li>
-						<li><a href="#" class=""><i class="lnr lnr-dice"></i> <span>Lista de Relatórios</span></a></li>
-						<li><a href="../controllers/logout.php" class=""><i class="lnr lnr-dice"></i> <span>Sair</span></a></li>
+						<li><a href="relatorios.php" class=""><i class="lnr lnr-dice"></i> <span>Lista de Relatórios</span></a></li>
+						<li><a href="../controllers/logout.php?logout=1" class=""><i class="lnr lnr-dice"></i> <span>Sair</span></a></li>
 						
 					</ul>
 				</nav>

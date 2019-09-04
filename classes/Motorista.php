@@ -60,6 +60,7 @@ class Motorista extends Conexao
             { 
                 session_start();
                 $_SESSION['IDMOTORISTA'] = $results['IDMOTORISTA'];
+                $_SESSION['NOME'] = $results['NOME'];
                 header("location: ../views/index.php");
                 return true;
             }else{

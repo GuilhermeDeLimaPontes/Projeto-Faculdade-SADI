@@ -179,7 +179,7 @@
 			  								<label for="observacao">Observação</label>
 			 								<textarea class="form-control" name="observacao" rows="5" id="observacao"></textarea>
 										  </div>
-										  <button class="btn btn-success btn-block">Cadastrar</button>
+										  <button class="btn btn-success btn-block" name="cadastrar">Cadastrar</button>
 									</div>
 								</div>			  				  
 							</div>
