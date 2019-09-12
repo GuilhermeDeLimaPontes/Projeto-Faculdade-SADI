@@ -12,11 +12,15 @@
 			$motorista->__set('email', $email);
 			$motorista->__set('senha', $senha);
 			$motorista->logarSistema();
+			
 		}else{
 			session_start();
             $_SESSION['loginErro'] = "Login ou Senha Inválida";
 			header("location: ../views/page-login.php");
 			exit;
 		}
+	}else{
+			header("location: ../views/page-login.php");
+			exit;
 	}
 ?>

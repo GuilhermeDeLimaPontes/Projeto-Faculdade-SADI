@@ -6,39 +6,43 @@
     require_once '../../classes/Paciente.php';
     
 
-    //tratamento dos inputs do tipo text
+    
     if(isset($_POST['cadastrar'])){ 
-        session_start();
-        
-            $nome_solicitante = $_POST['NomeSolicitante'];
-            $natureza_ocorrencia = $_POST['naturezaOcorrencia'];
-            $amb = $_POST['amb'];
-            $ra = $_POST['RA'];
-            $km_inicial = $_POST['kmInicial'];
-            $km_final = $_POST['kmFinal'];
-            $km_rodado = $_POST['kmRodado'];
-            $nome_paciente = $_POST['NomePaciente'];
-            $rg = $_POST['rg'];
-            $cartao_sus = $_POST['cartao_sus'];
-            $endereco = $_POST['endereco'];
-            $cidade = $_POST['cidade'];
-            $bairro = $_POST['bairro'];
-            $observacao = $_POST['observacao'];
-            $destino = $_POST['destino'];
-            $motorista = $_POST['motorista'];
-            $data_fato = $_POST['dataFato'];
-            $hora_comunicacao = $_POST['HoraComunicacao'];
-            $solicitamento = $_POST['solicitamento'];
-            $hora_fato = $_POST['horaFato'];
-            $hora_local = $_POST['horaLocal'];
-            $hora_final = $_POST['horaFinal'];
-            $sexo = $_POST['sexo'];
-            $data_nascimento = $_POST['dataNascimento'];
-            $estado  = $_POST['estado'];
-            $numero = $_POST['numero'];
 
+            //tratamento dos inputs Endereço
+            $bairro = filter_input(INPUT_POST, 'bairro', FILTER_SANITIZE_STRING);
+            $endereco = filter_input(INPUT_POST,'endereco', FILTER_SANITIZE_STRING);
+            $cidade = filter_input(INPUT_POST,'cidade', FILTER_SANITIZE_STRING);
+            $estado  = filter_input(INPUT_POST,'estado', FILTER_SANITIZE_STRING);
+            $numero = filter_input(INPUT_POST,'numero', FILTER_SANITIZE_NUMBER_INT);
             
+            //tratamento dos inputs  Origem
+            $nome_solicitante = filter_input(INPUT_POST,'NomeSolicitante', FILTER_SANITIZE_STRING);
+            $hora_comunicacao = addslashes($_POST['HoraComunicacao']);
+            $solicitamento = addslashes($_POST['solicitamento']);
+            $data_fato = addslashes($_POST['dataFato']);
 
+            //tratamento dos inputs Paciente
+            $nome_paciente = filter_input(INPUT_POST, 'NomePaciente', FILTER_SANITIZE_STRING);
+            $data_nascimento = $_POST['dataNascimento'];
+            $sexo = addslashes($_POST['sexo']);
+            $observacao = filter_input(INPUT_POST, 'observacao', FILTER_SANITIZE_STRING);
+            $rg = filter_input(INPUT_POST, 'rg', FILTER_SANITIZE_STRING);
+            $cartao_sus = filter_input(INPUT_POST, 'cartao_sus', FILTER_SANITIZE_STRING);
+
+            //tratamento dos inputs Ocorrência
+            $natureza_ocorrencia = filter_input(INPUT_POST, 'naturezaOcorrencia', FILTER_SANITIZE_STRING); 
+            $amb = filter_input(INPUT_POST, 'amb', FILTER_SANITIZE_STRING);
+            $ra = filter_input(INPUT_POST, 'RA', FILTER_SANITIZE_STRING);
+            $km_inicial = filter_input(INPUT_POST,'kmInicial', FILTER_SANITIZE_NUMBER_INT);
+            $km_final = filter_input(INPUT_POST,'kmFinal', FILTER_SANITIZE_NUMBER_INT);
+            $km_rodado = filter_input(INPUT_POST,'kmRodado', FILTER_SANITIZE_NUMBER_INT);
+            $destino = filter_input(INPUT_POST, 'destino', FILTER_SANITIZE_STRING);
+            $motorista = addslashes($_POST['motorista']);
+            $hora_fato = addslashes($_POST['horaFato']);
+            $hora_local = addslashes($_POST['horaLocal']);
+            $hora_final = addslashes($_POST['horaFinal']);
+            
             
                 $motorista = new Motorista();
                 $paciente = new Paciente();

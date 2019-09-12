@@ -87,6 +87,16 @@ class Motorista extends Conexao
         return $results;
     }
 
+    public function pegarDadosPorId($id)
+    {
+        $sql = "SELECT IDMOTORISTA, NOME, EMAIL FROM MOTORISTA WHERE IDMOTORISTA = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(":id", $id);
+        $stmt->execute();
+        $results = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $results;
+    }
+
     public function listarNomes()
     {
         $sql = "SELECT NOME FROM MOTORISTA";
@@ -98,12 +108,23 @@ class Motorista extends Conexao
 
     public function editar($id)
     {
+        $sql = "UPDATE MOTORISTA SET nome = :nome, email = :email WHERE IDMOTORISTA = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(":nome", $this->nome);
+        $stmt->bindValue(":email", $this->email);
+        $stmt->bindValue(":id", $id);
+        $stmt->execute();
 
+        session_start();
+        $_SESSION['update_success'] = "Alteração Concluída com Sucesso";
     }
 
     public function excluir($id)
     {
-
+        $sql = "DELETE FROM motorista WHERE IDMOTORISTA = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(":id", $id);
+        $stmt->execute();
     }
 
 

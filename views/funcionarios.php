@@ -8,6 +8,19 @@
 			<div class="main-content">
 				<div class="container-fluid">
 					<h3 class="page-title">Lista de Funcionários</h3>
+					<p class="lead text-center text-primary pt-2 pb-2">
+								<?php
+									if(isset($_SESSION['emailJaCadastrado'])){
+
+										echo $_SESSION['emailJaCadastrado'];
+										unset($_SESSION['emailJaCadastrado']);
+
+									}else if(isset($_SESSION['update_success'])){
+										echo $_SESSION['update_success'];
+										unset($_SESSION['update_success']);
+									}
+								?>
+					</p>
 					<div class="row">
 						<div class="col-md-12">
 							<!-- TABLE HOVER -->
@@ -40,14 +53,15 @@
 														{
 															echo "<td>$v</td>";
 														}
-														echo '<td>
-																<a href="#" class="btn btn-primary"><i class="fa fa-edit"></i> Editar</a> 
-																<a href="#" class="btn btn-danger" ><i class="fa fa-trash"></i> Excluir</a>
-															 </td>';
-														echo "<tr>";
+											?>
+														
+											<td>
+												<a href="update_motorista.php?id_update=<?php echo $dados[$i]['IDMOTORISTA'];?>" class="btn btn-primary"><i class="fa fa-edit"></i> Editar</a> 
+												<a href="../controllers/motorista/excluir.php?id=<?php echo $dados[$i]['IDMOTORISTA'];?>" class="btn btn-danger" ><i class="fa fa-trash"></i> Excluir</a>
+											</td>
+														 <?php 	echo "<tr>";
 													}
 												}
-			
 											?>
 										</tbody>
 									</table>

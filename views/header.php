@@ -78,7 +78,7 @@
 				<nav>
 					<ul class="nav">
 						<li><a href="index.php" class="active"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
-						<li><a href="cadastro-relatorio.php" class=""><i class="lnr lnr-code"></i> <span>Registro de Atendimento</span></a></li>
+						<li><a href="cadastro-relatorio.php" class=""><i class="lnr lnr-code"></i> <span>Registrar Atendimento</span></a></li>
 						<li><a href="cadastro-motorista.php" class=""><i class="lnr lnr-code"></i> <span>Cadastrar Motorista</span></a></li>
 						<li><a href="funcionarios.php" class=""><i class="lnr lnr-dice"></i> <span>Lista de Funcionários</span></a></li>
 						<li><a href="relatorios.php" class=""><i class="lnr lnr-dice"></i> <span>Lista de Relatórios</span></a></li>

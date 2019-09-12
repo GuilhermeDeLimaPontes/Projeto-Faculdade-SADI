@@ -16,7 +16,7 @@
 						<form action="../controllers/relatorio/cadastro.php" method="POST">
 							<div class="panel">
 								<div class="panel-heading">
-									<h3 class="panel-title">Cadastro de Relatório</h3>
+									<h3 class="panel-title">Registro de Atendimento</h3>
 								</div>
 							<div class="panel-body">
 										
