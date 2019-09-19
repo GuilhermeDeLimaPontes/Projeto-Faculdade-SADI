@@ -59,7 +59,7 @@
 												<a href="update_motorista.php?id_update=<?php echo $dados[$i]['IDMOTORISTA'];?>" class="btn btn-primary"><i class="fa fa-edit"></i> Editar</a> 
 												<a href="../controllers/motorista/excluir.php?id=<?php echo $dados[$i]['IDMOTORISTA'];?>" class="btn btn-danger" ><i class="fa fa-trash"></i> Excluir</a>
 											</td>
-														 <?php 	echo "<tr>";
+														 <?php 	echo "</tr>";
 													}
 												}
 											?>

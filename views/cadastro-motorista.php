@@ -17,6 +17,9 @@
 									}else if(isset($_SESSION['success'])){
 										echo $_SESSION['success'];
 										unset($_SESSION['success']);
+									}else if(isset($_SESSION['camposEmBranco'])){
+										echo $_SESSION['camposEmBranco'];
+										unset($_SESSION['camposEmBranco']);
 									}
 								?>
 					</p>
@@ -32,7 +35,7 @@
 									<input type="text" name="nome" class="form-control" placeholder="Insira seu nome" required>
 									<br>
 									<label class="">Email</label>
-									<input type="email" name="email" class="form-control" placeholder="Insira seu Email" value="" required>
+									<input type="email" name="email" class="form-control" placeholder="Insira seu Email" required>
 									<br>
 									<label class="">Senha</label>
 									<br>

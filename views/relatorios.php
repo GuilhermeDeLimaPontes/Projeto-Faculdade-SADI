@@ -13,7 +13,7 @@
 							<!-- TABLE HOVER -->
 							<div class="panel">
 								<div class="panel-heading">
-									<a href="cadastro-relatorio.php" class="btn btn-success">Cadastrar Relatório</a>
+									<a href="cadastro-relatorio.php" class="btn btn-success">Registrar Atendimento</a>
 								</div>
 								<div class="panel-body">
 									<table class="table table-hover">
@@ -43,12 +43,14 @@
 														{
 															echo "<td>$v</td>";
 														}
-														echo '<td>
-																<a href="#" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Editar</a> 
+											?>
+														<td>
+																<a href="update_paciente.php?id_update=<?php echo $dados[$i]['IDPACIENTE'] ?>" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Editar</a> 
                                                                 <a href="#" class="btn btn-danger btn-sm" ><i class="fa fa-trash"></i> Excluir</a>
                                                                 <a href="#" class="btn btn-success btn-sm" ><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Relatório</a>
-															 </td>';
-														echo "<tr>";
+														</td>
+
+														<?php echo "</tr>";
 													}
 												}
 			

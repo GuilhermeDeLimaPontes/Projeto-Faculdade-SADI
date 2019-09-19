@@ -48,6 +48,35 @@ Class Paciente extends Conexao {
         }    
     }
 
+    public function editar($id)
+    {
+        $sql = "UPDATE paciente SET NOME = :nome, 
+                                    DATA_NASCIMENTO = :data_nascimento, 
+                                    SEXO = :sexo, 
+                                    OBSERVACAO = :observacao,
+                                    RG = :rg,
+                                    CARTAO_SUS = :cartao_sus 
+                                    WHERE IDPACIENTE = :id";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(":nome",$this->nome);
+        $stmt->bindValue(":data_nascimento",$this->data_nascimento);
+        $stmt->bindValue(":sexo",$this->sexo);
+        $stmt->bindValue(":observacao",$this->observacao);
+        $stmt->bindValue(":rg",$this->rg);
+        $stmt->bindValue(":cartao_sus",$this->cartao_sus);
+        $stmt->bindValue(":id", $id);
+        $stmt->execute();
+                                    
+    }
+
+    
+
+    public function excluir($id)
+    {
+
+    }
+
     public function getLastIdPaciente()
     {
         $sql = "SELECT IDPACIENTE FROM paciente ORDER BY IDPACIENTE DESC LIMIT 1";
@@ -56,15 +85,15 @@ Class Paciente extends Conexao {
 
         if($stmt->rowCount() > 0)
         {
-         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-         $lastId = $result['IDPACIENTE']+1;
-         return intval($lastId);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            $lastId = $result['IDPACIENTE']+1;
+            return intval($lastId);
         }
     }
 
     public function listar()
     {
-        $sql = "SELECT IDPACIENTE,NOME,DATA_NASCIMENTO,SEXO,RG,CARTAO_SUS FROM paciente order by NOME";
+        $sql = "SELECT IDPACIENTE,NOME,DATA_NASCIMENTO,SEXO,RG,CARTAO_SUS FROM paciente order by IDPACIENTE";
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -73,14 +102,16 @@ Class Paciente extends Conexao {
 
     }
 
-    public function editar($id)
+    public function pegarDadosPorId($id)
     {
+        $sql = "SELECT IDPACIENTE, NOME, DATA_NASCIMENTO, SEXO,OBSERVACAO, RG, CARTAO_SUS FROM paciente WHERE IDPACIENTE = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(":id", $id);
+        $stmt->execute();
 
-    }
+        $results = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    public function excluir($id)
-    {
-
+        return $results;
     }
 }
 

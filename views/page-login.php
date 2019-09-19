@@ -1,6 +1,10 @@
 <!doctype html>
 <?php
 	session_start();
+	if(isset($_SESSION['IDMOTORISTA'])){ 
+		header("location: ../views/index.php");
+		exit;	
+	}
 ?>
 <html lang="en" class="fullscreen-bg">
 
