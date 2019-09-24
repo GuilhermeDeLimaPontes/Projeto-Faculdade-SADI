@@ -5,8 +5,6 @@
     require_once '../../classes/Origem.php';
     require_once '../../classes/Paciente.php';
     
-
-    
     if(isset($_POST['cadastrar'])){ 
 
             //tratamento dos inputs Endereço

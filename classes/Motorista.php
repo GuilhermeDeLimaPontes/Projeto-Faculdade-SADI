@@ -99,7 +99,7 @@ class Motorista extends Conexao
 
     public function listarNomes()
     {
-        $sql = "SELECT NOME FROM MOTORISTA";
+        $sql = "SELECT IDMOTORISTA, NOME FROM MOTORISTA";
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);

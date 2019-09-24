@@ -151,34 +151,50 @@
 										  </div>
 
 										  <div class="form-row">
-										    <div class="form-group col-md-8">
+										    <div class="form-group col-md-12">
 										      <label for="Destino">Destino</label>
 										      <input type="text" name="destino" class="form-control" id="Destino" placeholder="Destino">
 										    </div>
-										    <div class="form-group col-md-4">
-										      <label for="Motorista">Motorista Responsavel pela Ocorrencia</label>
-										      <select id="motorista" name="motorista" class="form-control">
-										        <?php
+										  </div>
+										    <div class="form-row">
+												<div class="form-group col-md-12">
+													<label for="observacao">Relatório do Atendente</label>
+													<textarea class="form-control" name="observacao" rows="5" id="observacao"></textarea>
+												</div>
+										  	</div>
+
+										  <div class="form-row">
+										    <div class="form-group col-md-12">
+												<h4 class="text-center">Integrantes da Equipe</h4>
+												<div class="form-check form-check-inline">
+												
+												<?php
 													$motorista = New Motorista();
 
 													$dados = $motorista->listarNomes();
+													
 													 
 													for ($i=0; $i < count($dados) ; $i++) 
 													{ 
 														foreach ($dados[$i] as $k => $v) 
 														{
-															echo "<option>$v</option>";
+															if($k != "IDMOTORISTA")
+															{ 
+															
+												?>
+															<input class="form-check-input" type="checkbox" name="check_motorista[]" id="inlineCheckbox1" value="<?php echo $dados[$i]['IDMOTORISTA']?>">
+													        <label class="form-check-label" for="inlineCheckbox1"> <?php echo $v ?> </label><br>
+												<?php	
+															}
+
 														}
 													}
 												?>
-										      </select>
+			
+												</div>
 										    </div>
 										  </div>
 
-										  <div class="form-group col-md-12">
-			  								<label for="observacao">Observação</label>
-			 								<textarea class="form-control" name="observacao" rows="5" id="observacao"></textarea>
-										  </div>
 										  <button class="btn btn-success btn-block" name="cadastrar">Cadastrar</button>
 									</div>
 								</div>			  				  
