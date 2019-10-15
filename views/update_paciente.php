@@ -1,6 +1,7 @@
 		<?php
 			require_once 'header.php';
 			require_once '../classes/Paciente.php';
+			require_once '../classes/Endereco.php';
 		?>
 		<!-- MAIN -->
 	<div class="main">
@@ -13,15 +14,19 @@
 							<!-- BUTTONS -->
 							<!-- END BUTTONS -->
 							<!-- INPUTS -->
-						<form action="../controllers/relatorio/cadastro.php" method="POST">
+						<form action="../controllers/relatorio/editar.php" method="POST">
 							<div class="panel">
 								<div class="panel-heading">
 									<h3 class="panel-title">Alterar dados do Paciente</h3>
 											<?php 
-												if(isset($_GET['id_update']))
+												if(isset($_GET['id_update']) && isset($_GET['id_endereco_update']))
 												{
 													$paciente = new Paciente();
+													$endereco = new Endereco();
 													$dados = $paciente->pegarDadosPorId($_GET['id_update']);
+													$dadosEndereco = $endereco->pegarDadosPorId($_GET['id_endereco_update']);
+
+							
 												}else{
 													header("location: update_paciente.php");
 												}			
@@ -68,12 +73,38 @@
 			  								<label for="observacao">Observação</label>
 			 								<textarea class="form-control" name="observacao_update" rows="5" id="observacao"><?php echo $dados['OBSERVACAO']?></textarea>
 										  </div>
-										
-				
+										  
+										  <div class="form-row">
+											<div class="form-group col-md-10">
+											<input type="hidden" id="custId" name="id_endereco" value="<?php echo $dadosEndereco['IDENDERECO']?>">
+												<label for="endereco">Endereço</label>
+												<input type="text" name="endereco_update" class="form-control" id="endereco" value="<?php echo $dadosEndereco['RUA']?>">
+											</div>
+											<div class="form-group col-md-2">
+												<label for="numero">Número</label>
+												<input type="number" name="numero_update" class="form-control" id="numero" value="<?php echo $dadosEndereco['NUMERO']?>">
+											</div>
+										 </div>	
+										  <div class="form-row">
+										    <div class="form-group col-md-6">
+										      <label for="cidade">Cidade</label>
+										      <input type="text" name="cidade_update" class="form-control" id="cidade" value="<?php echo $dadosEndereco['CIDADE']?>">
+										    </div>
+										    <div class="form-group col-md-4">
+										      <label for="estado">Estado</label>
+										      <select id="estado" name="estado_update" class="form-control">
+										        <option value="SP">SP</option>
+										      </select>
+										    </div>
+										    <div class="form-group col-md-2">
+										      <label for="bairro">BAIRRO</label>
+										      <input type="text" name="bairro_update" class="form-control" id="bairro" value="<?php echo $dadosEndereco['BAIRRO']?>">
+										    </div>
+										  </div>
 										  </div>
 
 										  
-										  <button class="btn btn-success btn-block" name="btn-update">Enviar</button>
+										  <button class="btn btn-success btn-block" name="btn-update">Alterar Dados</button>
 									</div>
 								</div>			  				  
 							</div>

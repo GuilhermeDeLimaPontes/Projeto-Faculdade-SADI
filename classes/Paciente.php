@@ -93,7 +93,7 @@ Class Paciente extends Conexao {
 
     public function listar()
     {
-        $sql = "SELECT IDPACIENTE,NOME,DATA_NASCIMENTO,SEXO,RG,CARTAO_SUS FROM paciente order by IDPACIENTE";
+        $sql = "SELECT IDPACIENTE, FK_ID_ENDERECO, NOME,DATA_NASCIMENTO,SEXO,RG,CARTAO_SUS FROM paciente order by IDPACIENTE";
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -109,9 +109,14 @@ Class Paciente extends Conexao {
         $stmt->bindValue(":id", $id);
         $stmt->execute();
 
-        $results = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($stmt->rowCount() > 0)
+        {
+            $results = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        return $results;
+            return $results;
+        }else{
+            $results = array();
+        }
     }
 }
 

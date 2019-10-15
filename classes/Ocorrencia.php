@@ -73,6 +73,21 @@ Class Ocorrencia extends Conexao{
     {
 
     }
+
+    public function getLastIdOcorrencia()
+    {
+        
+        $sql = "SELECT IDOCORRENCIA FROM ocorrencia ORDER BY IDOCORRENCIA DESC LIMIT 1";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+
+        if($stmt->rowCount() > 0)
+        {
+         $result = $stmt->fetch(PDO::FETCH_ASSOC);
+         $lastId = $result['IDOCORRENCIA'];
+         return intval($lastId);
+        }
+    }
 }
 
 ?>

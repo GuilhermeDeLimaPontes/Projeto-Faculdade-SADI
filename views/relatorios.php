@@ -8,6 +8,19 @@
 			<div class="main-content">
 				<div class="container-fluid">
 					<h3 class="page-title">Lista de Pacientes</h3>
+					<p class="lead text-center text-primary pt-2 pb-2">
+								<?php
+									if(isset($_SESSION['Success'])){
+
+										echo $_SESSION['Success'];
+										unset($_SESSION['Success']);
+
+									}else if(isset($_SESSION['Warning'])){
+										echo $_SESSION['Warning'];
+										unset($_SESSION['Warning']);
+									}
+								?>
+					</p>
 					<div class="row">
 						<div class="col-md-12">
 							<!-- TABLE HOVER -->
@@ -41,11 +54,13 @@
 														echo "<tr>";
 														foreach ($dados[$i] as $k => $v) 
 														{
+															if($k != "FK_ID_ENDERECO"){
 															echo "<td>$v</td>";
+															}
 														}
 											?>
 														<td>
-																<a href="update_paciente.php?id_update=<?php echo $dados[$i]['IDPACIENTE'] ?>" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Editar</a> 
+																<a href="update_paciente.php?id_update=<?php echo $dados[$i]['IDPACIENTE'] ?>&id_endereco_update=<?php echo $dados[$i]['FK_ID_ENDERECO']?>" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Editar</a> 
                                                                 <a href="#" class="btn btn-danger btn-sm" ><i class="fa fa-trash"></i> Excluir</a>
                                                                 <a href="#" class="btn btn-success btn-sm" ><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Relatório</a>
 														</td>

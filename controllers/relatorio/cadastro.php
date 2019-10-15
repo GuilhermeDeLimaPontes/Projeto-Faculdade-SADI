@@ -4,7 +4,10 @@
     require_once '../../classes/Ocorrencia.php';
     require_once '../../classes/Origem.php';
     require_once '../../classes/Paciente.php';
+    require_once '../../classes/Ocorrencia_Motorista.php';
     
+    
+
     if(isset($_POST['cadastrar'])){ 
 
             //tratamento dos inputs Endereço
@@ -36,7 +39,6 @@
             $km_final = filter_input(INPUT_POST,'kmFinal', FILTER_SANITIZE_NUMBER_INT);
             $km_rodado = filter_input(INPUT_POST,'kmRodado', FILTER_SANITIZE_NUMBER_INT);
             $destino = filter_input(INPUT_POST, 'destino', FILTER_SANITIZE_STRING);
-            $motorista = addslashes($_POST['motorista']);
             $hora_fato = addslashes($_POST['horaFato']);
             $hora_local = addslashes($_POST['horaLocal']);
             $hora_final = addslashes($_POST['horaFinal']);
@@ -47,6 +49,7 @@
                 $origem = new Origem();
                 $ocorrencia = new Ocorrencia();
                 $endereco_paciente = new Endereco();
+                $ocorrencia_motorista = new Ocorrencia_Motorista();
         
                 $endereco_paciente->__set('numero', $numero);
                 $endereco_paciente->__set('bairro', $bairro);
@@ -81,7 +84,7 @@
                 $ocorrencia->__set('ra',$ra);
                 $ocorrencia->__set('fk_id_paciente',$paciente->getLastIdPaciente());
                 $ocorrencia->__set('fk_id_origem',$origem->getLastIdOrigem());
-
+ 
 
                 try{
                     $endereco_paciente->cadastrar();
@@ -106,9 +109,20 @@
                 }catch(Exception $e){
                     echo "Erro Genérico".$e->getMessage();
                 }
-                     
-    
-                
+
+                if(isset($_POST['check_motorista']))
+                {
+                    $dados_checkbox = array_values($_POST['check_motorista']);
+
+                    for($i = 0; $i < count($dados_checkbox); $i++)
+                    {
+                        $ocorrencia_motorista->__set('id_ocorrencia', $ocorrencia->getLastIdOcorrencia());
+                        $ocorrencia_motorista->__set('id_motorista', intval($dados_checkbox[$i]));
+                        $ocorrencia_motorista->cadastrar();
+                    }
+                    
+                }
+
                 header("location: ../../views/cadastro-relatorio.php");
 
      }

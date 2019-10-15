@@ -59,6 +59,22 @@ Class Endereco extends Conexao{
         }
     }
 
+    public function pegarDadosPorId($id)
+    {
+        $sql = "SELECT IDENDERECO, NUMERO, BAIRRO, RUA, ESTADO, CIDADE from endereco WHERE IDENDERECO = :id ";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(":id", $id);
+        $stmt->execute();
+
+        if($stmt->rowCount() > 0)
+        {
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result;
+        }else{
+            $result = array();
+        }
+    }
+
     public function listar()
     {
 
@@ -66,6 +82,26 @@ Class Endereco extends Conexao{
 
     public function editar($id)
     {
+        $sql = "UPDATE endereco SET 
+                RUA = :rua, BAIRRO = :bairro, NUMERO= :numero, CIDADE = :cidade, ESTADO = :estado
+                WHERE IDENDERECO = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(":rua",$this->rua);
+        $stmt->bindValue(":bairro",$this->bairro);
+        $stmt->bindValue(":numero",$this->numero);
+        $stmt->bindValue(":cidade",$this->cidade);
+        $stmt->bindValue(":estado",$this->estado);
+        $stmt->bindValue(":id",$id);
+        $stmt->execute();
+
+        if($stmt->execute())
+        {
+            session_start();
+            $_SESSION['Success'] = "Dados Alterados Com Sucesso";
+        }else{
+            session_start();
+            $_SESSION['Warning'] = "Erro ao Alterar. Tente Novamente Mais Tarde";
+        }
 
     }
 
