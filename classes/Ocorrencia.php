@@ -88,6 +88,72 @@ Class Ocorrencia extends Conexao{
          return intval($lastId);
         }
     }
+
+    public function pegarIdOcorrenciaPorPaciente($id)
+    {
+        $sql = "SELECT IDOCORRENCIA FROM ocorrencia WHERE FK_ID_PACIENTE = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(":id", $id);
+        $stmt->execute();
+
+        if($stmt->execute() && $stmt->rowCount() > 0)
+        {
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            $id = $result['IDOCORRENCIA'];
+            return intval($id);
+        }else{
+            return array();
+        }
+    }
+
+    public function DadosDoAtendimento($id)
+    {
+        $sql = "SELECT OCORRENCIA.DESTINO , 
+                OCORRENCIA.HORA_FINAL, OCORRENCIA.HORA_FATO, OCORRENCIA.HORA_LOCAL, OCORRENCIA.KM_INICIAL, OCORRENCIA.KM_RODADO, OCORRENCIA.KM_FINAL, OCORRENCIA.PREFIXO_AMB, OCORRENCIA.NATUREZA_OCORRENCIA, OCORRENCIA.RA, 
+                PACIENTE.NOME, PACIENTE.DATA_NASCIMENTO, PACIENTE.SEXO, PACIENTE.OBSERVACAO, PACIENTE.RG, PACIENTE.CARTAO_SUS, 
+                ORIGEM.NOME_SOLICITANTE, ORIGEM.HORA_COMUNICACAO, ORIGEM.SOLICITAMENTO, ORIGEM.DATA_FATO, 
+                ENDERECO.RUA, ENDERECO.BAIRRO, ENDERECO.NUMERO, ENDERECO.CIDADE, ENDERECO.ESTADO
+                FROM OCORRENCIA 
+                INNER JOIN PACIENTE ON OCORRENCIA.FK_ID_PACIENTE = PACIENTE.IDPACIENTE
+                INNER JOIN ORIGEM ON OCORRENCIA.FK_ID_ORIGEM = ORIGEM.IDORIGEM
+                INNER JOIN ENDERECO ON PACIENTE.FK_ID_ENDERECO = ENDERECO.IDENDERECO
+                WHERE IDPACIENTE = :id";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(":id", $id);
+        $stmt->execute();
+
+        if($stmt->execute() && $stmt->rowCount() > 0)
+        {
+            $results = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $results;
+        }else{
+            return array();
+        }
+    }
+
+    public function EquipeAtendimento($idOcorrencia)
+    {
+        $sql = "SELECT motorista.NOME 
+                FROM motorista 
+                INNER JOIN ocorrencia_motorista 
+                ON motorista.IDMOTORISTA = ocorrencia_motorista.ID_MOTORISTA 
+                INNER JOIN ocorrencia 
+                ON ocorrencia.IDOCORRENCIA = ocorrencia_motorista.ID_OCORRENCIA 
+                WHERE IDOCORRENCIA = :idocorrencia";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue();
+        $stmt->execute();
+
+        if($stmt->execute() && $stmt->rowCount() > 0)
+        {
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $results;
+        }else{
+            return array();
+        }
+    }
 }
 
 ?>

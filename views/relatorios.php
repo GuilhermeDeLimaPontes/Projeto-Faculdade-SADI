@@ -1,6 +1,7 @@
 <?php
 			require_once 'header.php';
-			require_once '../classes/Paciente.php'
+			require_once '../classes/Paciente.php';
+			require_once '../classes/Ocorrencia.php';
 		?>
 		<!-- MAIN -->
 		<div class="main">
@@ -44,6 +45,7 @@
 										<tbody>
 											<?php 
 												$paciente = new Paciente();
+												$ocorrencia = new Ocorrencia();
 												
 												$dados = $paciente->listar();
 
@@ -54,15 +56,18 @@
 														echo "<tr>";
 														foreach ($dados[$i] as $k => $v) 
 														{
-															if($k != "FK_ID_ENDERECO"){
-															echo "<td>$v</td>";
+															if($k != "FK_ID_ENDERECO")
+															{
+																echo "<td>$v</td>";
 															}
+															
 														}
 											?>
+												  	<?php $id = $ocorrencia->pegarIdOcorrenciaPorPaciente($dados[$i]['IDPACIENTE']); ?>
 														<td>
 																<a href="update_paciente.php?id_update=<?php echo $dados[$i]['IDPACIENTE'] ?>&id_endereco_update=<?php echo $dados[$i]['FK_ID_ENDERECO']?>" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Editar</a> 
                                                                 <a href="#" class="btn btn-danger btn-sm" ><i class="fa fa-trash"></i> Excluir</a>
-                                                                <a href="#" class="btn btn-success btn-sm" ><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Relatório</a>
+                                                                <a href="../registro-atendimento-pdf/registro-atendimento.php?id_paciente=<?php echo $dados[$i]['IDPACIENTE'] ?>&id_ocorrencia=<?php echo $id ?>" target="_blank" class="btn btn-success btn-sm" ><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Relatório</a>
 														</td>
 
 														<?php echo "</tr>";
