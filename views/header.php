@@ -1,14 +1,10 @@
 <!doctype html>
 <html lang="en">
-<?php		
-			session_start();
-			if(!isset($_SESSION['IDMOTORISTA'])){ 
-				header("location: ../views/page-login.php");
-				exit;	
-			}
-				
-			
-?>
+	<?php		
+				require_once '../classes/Motorista.php';
+				$motorista = new Motorista();
+				$motorista::verificarLogin();	
+	?>
 <head>
 	<title>Sadi | Serviço de Atendimento Domiciliar de Itapeva</title>
 	<meta charset="utf-8">

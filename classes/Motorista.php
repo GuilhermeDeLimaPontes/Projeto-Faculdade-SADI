@@ -55,7 +55,7 @@ class Motorista extends Conexao
             $results = $stmt->fetch(PDO::FETCH_ASSOC);
             
             $hash = $results['SENHA'];
-
+            
             if(password_verify($this->senha, $hash))
             { 
                 session_start();
@@ -125,6 +125,15 @@ class Motorista extends Conexao
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(":id", $id);
         $stmt->execute();
+    }
+
+    public static function verificarLogin()
+    {
+        session_start();
+			if(!isset($_SESSION['IDMOTORISTA'])){ 
+				header("location: ../views/page-login.php");
+				exit;	
+			}
     }
 
 

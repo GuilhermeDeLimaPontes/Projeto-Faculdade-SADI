@@ -102,7 +102,7 @@ Class Ocorrencia extends Conexao{
             $id = $result['IDOCORRENCIA'];
             return intval($id);
         }else{
-            return array();
+            return '';
         }
     }
 
@@ -143,7 +143,7 @@ Class Ocorrencia extends Conexao{
                 WHERE IDOCORRENCIA = :idocorrencia";
 
         $stmt = $this->db->prepare($sql);
-        $stmt->bindValue();
+        $stmt->bindValue(":idocorrencia", $idOcorrencia);
         $stmt->execute();
 
         if($stmt->execute() && $stmt->rowCount() > 0)
