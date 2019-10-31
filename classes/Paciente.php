@@ -91,6 +91,7 @@ Class Paciente extends Conexao {
         }
     }
 
+    //listando pacientes em relatório.php
     public function listar()
     {
         $sql = "SELECT IDPACIENTE, FK_ID_ENDERECO, NOME,DATA_NASCIMENTO,SEXO,RG,CARTAO_SUS FROM paciente order by IDPACIENTE";
@@ -115,8 +116,46 @@ Class Paciente extends Conexao {
 
             return $results;
         }else{
-            $results = array();
+            return $results = array();
         }
+    }
+
+    public function paginacao($inicio = 1, $itemPorPage = 10)
+    {
+        $page = ($inicio - 1) * $itemPorPage;
+
+        $sql = "SELECT IDPACIENTE, FK_ID_ENDERECO, NOME,DATA_NASCIMENTO,SEXO,RG,CARTAO_SUS FROM paciente order by IDPACIENTE LIMIT :inicio, :itensporpage";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(":inicio", $page);
+        $stmt->bindValue(":itensporpage", $itemPorPage);
+        $stmt->execute();
+
+        return array(
+                        'dados'=>$stmt->fetchAll(PDO::FETCH_ASSOC),
+                        'numLinhas'=>$stmt->rowCount()
+                    );
+        
+
+
+    }
+
+    public function pesquisar($search)
+    {
+        $sql = "SELECT IDPACIENTE, FK_ID_ENDERECO, NOME,DATA_NASCIMENTO,SEXO,RG,CARTAO_SUS FROM paciente WHERE nome LIKE :search OR RG LIKE :search OR CARTAO_SUS LIKE :search";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(":search", '%'.$search.'%');
+        $stmt->execute();
+
+        if($stmt->execute() && $stmt->rowCount() > 0)
+        {
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            return $results;
+        }else{
+            return $results = array();
+        }
+
+
     }
 }
 

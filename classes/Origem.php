@@ -2,7 +2,8 @@
 
 require_once __DIR__ .'/../db/Conexao.php';
 
-Class Origem extends Conexao{
+Class Origem extends Conexao
+{
     private $nome_solicitante;
     private $hora_comunicacao;
     private $solicitamento;

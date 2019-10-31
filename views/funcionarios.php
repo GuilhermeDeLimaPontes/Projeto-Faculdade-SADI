@@ -18,6 +18,9 @@
 									}else if(isset($_SESSION['update_success'])){
 										echo $_SESSION['update_success'];
 										unset($_SESSION['update_success']);
+									}else if(isset($_SESSION['deleteError'])){
+										echo $_SESSION['deleteError'];
+										unset($_SESSION['deleteError']);
 									}
 								?>
 					</p>

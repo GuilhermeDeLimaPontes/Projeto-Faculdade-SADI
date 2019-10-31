@@ -6,7 +6,7 @@
 			<!-- MAIN CONTENT -->
 			<div class="main-content">
 				<div class="container-fluid">
-					<h3 class="page-title">Elements</h3>
+					<h3 class="page-title">Cadastrar Motorista</h3>
 					<p class="lead text-center text-primary pt-2 pb-2">
 								<?php
 									if(isset($_SESSION['emailJaCadastrado'])){
@@ -27,9 +27,6 @@
 						<div class="col-md-12">
 							<form action="../controllers/motorista/cadastro.php" method="POST">
 							<div class="panel">
-								<div class="panel-heading">
-									<h3 class="panel-title">Cadastro de Motorista</h3>
-								</div>
 								<div class="panel-body">
 									<label class="">Nome Completo</label>
 									<input type="text" name="nome" class="form-control" placeholder="Insira seu nome" required>

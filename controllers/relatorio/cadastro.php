@@ -8,7 +8,8 @@
     
     
 
-    if(isset($_POST['cadastrar'])){ 
+    if(isset($_POST['cadastrar']))
+    { 
 
             //tratamento dos inputs Endereço
             $bairro = filter_input(INPUT_POST, 'bairro', FILTER_SANITIZE_STRING);

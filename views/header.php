@@ -70,11 +70,11 @@
 			<div class="sidebar-scroll">
 				<nav>
 					<ul class="nav">
-						<li><a href="index.php" class=""><i class="lnr lnr-home"></i> <span>Home</span></a></li>
+						<li><a href="index.php" class=""><i class="lnr lnr-home"></i> <span>Página Inicial</span></a></li>
 						<li><a href="cadastro-relatorio.php" class=""><i class="lnr lnr-code"></i> <span>Registrar Atendimento</span></a></li>
 						<li><a href="cadastro-motorista.php" class=""><i class="lnr lnr-code"></i> <span>Cadastrar Motorista</span></a></li>
-						<li><a href="funcionarios.php" class=""><i class="lnr lnr-dice"></i> <span>Lista de Funcionários</span></a></li>
-						<li><a href="relatorios.php" class=""><i class="lnr lnr-dice"></i> <span>Lista de Pacientes</span></a></li>
+						<li><a href="funcionarios.php" class=""><i class="lnr lnr-dice"></i> <span>Listar Mototistas</span></a></li>
+						<li><a href="relatorios.php" class=""><i class="lnr lnr-dice"></i> <span>Listar Pacientes</span></a></li>
 						<li><a href="../controllers/logout.php?logout=1" class=""><i class="lnr lnr-dice"></i> <span>Sair</span></a></li>
 						
 					</ul>

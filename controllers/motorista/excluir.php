@@ -9,7 +9,7 @@
         $motorista->excluir($id);
         header("location: ../../views/funcionarios.php");
     }else{
-        echo "erro ao excluir";
+        header("location: ../../views/funcionarios.php");
     }
 
 ?>

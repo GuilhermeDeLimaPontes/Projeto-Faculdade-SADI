@@ -7,13 +7,13 @@
 			<!-- MAIN CONTENT -->
 			<div class="main-content">
 				<div class="container-fluid">
-					<h3 class="page-title">Elements</h3>
+					<h3 class="page-title">Alterar Dados - Motorista</h3>
 					<div class="row">
 						<div class="col-md-12">
 							<form action="../controllers/motorista/editar.php" method="POST">
 							<div class="panel">
 								<div class="panel-heading">
-									<h3 class="panel-title">Alterar Dados - Motorista</h3>
+									
 									<?php 
 										if(isset($_GET['id_update']))
 										{

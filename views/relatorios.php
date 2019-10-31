@@ -2,7 +2,7 @@
 			require_once 'header.php';
 			require_once '../classes/Paciente.php';
 			require_once '../classes/Ocorrencia.php';
-		?>
+?>
 		<!-- MAIN -->
 		<div class="main">
 			<!-- MAIN CONTENT -->
@@ -26,9 +26,26 @@
 						<div class="col-md-12">
 							<!-- TABLE HOVER -->
 							<div class="panel">
-								<div class="panel-heading">
+							  <div class="col-md-4">
+							  <div class="panel-heading">
 									<a href="cadastro-relatorio.php" class="btn btn-success">Registrar Atendimento</a>
 								</div>
+							  </div>
+							  <form class="navbar-form navbar-right" method="GET" action="relatorios.php?search=<?php echo $_GET['search'] ?>" >
+								<div class="col-md-8 col-sm-12">
+										<div class="input-group">
+											<?php 
+							
+												  $stringPesquisa = (!empty($_GET['search'])) ? $_GET['search'] : '';
+												  $stringPesquisa = filter_input(INPUT_GET, 'search', FILTER_SANITIZE_SPECIAL_CHARS);
+												  		
+											?>
+
+											<input type="text" name="search" value="<?php echo  $stringPesquisa ?>" class="form-control" placeholder="Nome ou RG ou Cartão SUS">
+											<span class="input-group-btn"><button type="submit" class="btn btn-primary">Pesquisar</button></span>
+										</div>
+								</div>
+							  </form>	
 								<div class="panel-body">
 									<table class="table table-hover">
 										<thead>
@@ -48,20 +65,22 @@
 												$ocorrencia = new Ocorrencia();
 												
 												$dados = $paciente->listar();
-
-												if(count($dados) > 0)
+												if(!isset($_GET['search']))
 												{
-													for ($i=0; $i < count($dados) ; $i++) 
-													{ 
-														echo "<tr>";
-														foreach ($dados[$i] as $k => $v) 
-														{
-															if($k != "FK_ID_ENDERECO")
+													if(count($dados) > 0)
+													{
+														for ($i=0; $i < count($dados) ; $i++) 
+														{ 
+															echo "<tr>";
+															foreach ($dados[$i] as $k => $v) 
 															{
-																echo "<td>$v</td>";
+																if($k != "FK_ID_ENDERECO")
+																{
+																	echo "<td>$v</td>";
+																}
+													
 															}
-															
-														}
+												
 											?>
 												  	<?php $id = $ocorrencia->pegarIdOcorrenciaPorPaciente($dados[$i]['IDPACIENTE']); ?>
 														<td>
@@ -71,13 +90,49 @@
 														</td>
 
 														<?php echo "</tr>";
+														}
+													}
+												}else{
+													$pesquisa = $paciente->pesquisar($stringPesquisa);
+													if(count($pesquisa) > 0)
+													{
+														for ($i=0; $i < count($pesquisa) ; $i++) 
+														{ 
+															echo "<tr>";
+															foreach ($pesquisa[$i] as $k => $v) 
+															{
+																if($k != "FK_ID_ENDERECO")
+																{
+																	echo "<td>$v</td>";
+																}
+													
+															}
+												
+											?>
+												  	<?php $id = $ocorrencia->pegarIdOcorrenciaPorPaciente($pesquisa[$i]['IDPACIENTE']); ?>
+														<td>
+																<a href="update_paciente.php?id_update=<?php echo $pesquisa[$i]['IDPACIENTE'] ?>&id_endereco_update=<?php echo $pesquisa[$i]['FK_ID_ENDERECO']?>" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Editar</a> 
+                                                                <a href="#" class="btn btn-danger btn-sm" ><i class="fa fa-trash"></i> Excluir</a>
+                                                                <a href="../registro-atendimento-pdf/registro-atendimento.php?id_paciente=<?php echo $pesquisa[$i]['IDPACIENTE'] ?>&id_ocorrencia=<?php echo $id ?>" target="_blank" class="btn btn-success btn-sm" ><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Relatório</a>
+														</td>
+
+														<?php echo "</tr>";
+														}
+													}else{
+														echo '<h4 class="lead text-left text-danger">Paciente não encontrado</h4>';
 													}
 												}
-			
 											?>
 										</tbody>
 									</table>
+									<nav aria-label="...">
+								<ul class="pagination pagination-sm">
+									<li class="page-item"><a class="page-link" href="#" >1</a></li>
+									
+								</ul>
+							</nav>
 								</div>
+								
 							</div>
 							<!-- END TABLE HOVER -->
 						</div>

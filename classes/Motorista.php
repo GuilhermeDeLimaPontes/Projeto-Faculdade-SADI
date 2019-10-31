@@ -24,7 +24,8 @@ class Motorista extends Conexao
         $stmt->bindValue(":email", $this->email);
         $stmt->execute();
 
-        if($stmt->rowCount() > 0){
+        if($stmt->rowCount() > 0)
+        {
             session_start();
             $_SESSION['emailJaCadastrado'] = "Email já existente";
             return false;
@@ -96,7 +97,7 @@ class Motorista extends Conexao
         $results = $stmt->fetch(PDO::FETCH_ASSOC);
         return $results;
     }
-
+    //função usada para listar os nomes dos motoristas em cadastro_relatorio.php
     public function listarNomes()
     {
         $sql = "SELECT IDMOTORISTA, NOME FROM MOTORISTA";
@@ -121,16 +122,30 @@ class Motorista extends Conexao
 
     public function excluir($id)
     {
-        $sql = "DELETE FROM motorista WHERE IDMOTORISTA = :id";
+        $sql = "SELECT * FROM ocorrencia_motorista WHERE ID_MOTORISTA = :ID";
         $stmt = $this->db->prepare($sql);
-        $stmt->bindParam(":id", $id);
+        $stmt->bindParam(":ID", $id);
         $stmt->execute();
+        $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        if($stmt->rowCount() > 0)
+        {
+            session_start();
+            $_SESSION['deleteError'] = "Erro ao Excluir Motorista. Existem Registros Associados a ele";
+        }else{ 
+
+            $sql = "DELETE FROM motorista WHERE IDMOTORISTA = :id";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(":id", $id);
+            $stmt->execute();
+        }
     }
 
     public static function verificarLogin()
     {
         session_start();
-			if(!isset($_SESSION['IDMOTORISTA'])){ 
+            if(!isset($_SESSION['IDMOTORISTA']))
+            { 
 				header("location: ../views/page-login.php");
 				exit;	
 			}
