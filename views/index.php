@@ -1,6 +1,7 @@
 
 		<?php
 			require_once 'header.php';
+			require_once '../classes/Ocorrencia.php';
 		?>
 		<!-- MAIN -->
 		<div class="main">
@@ -10,48 +11,56 @@
 					<!-- OVERVIEW -->
 					<div class="panel panel-headline">
 						<div class="panel-heading">
-							<h3 class="panel-title">Weekly Overview</h3>
-							<p class="panel-subtitle">Period: Oct 14, 2016 - Oct 21, 2016</p>
+							<h2 class="display-1 text-uppercase text-center">Seja Bem-Vindo(a) <?php echo $_SESSION['NOME'] ?> </h2>
+							
 						</div>
 						<div class="panel-body">
 							<div class="row">
-								<div class="col-md-3">
-									<div class="metric">
-										<span class="icon"><i class="fa fa-download"></i></span>
-										<p>
-											<span class="number">1,252</span>
-											<span class="title">Downloads</span>
-										</p>
-									</div>
-								</div>
-								<div class="col-md-3">
-									<div class="metric">
-										<span class="icon"><i class="fa fa-shopping-bag"></i></span>
-										<p>
-											<span class="number">203</span>
-											<span class="title">Sales</span>
-										</p>
-									</div>
-								</div>
-								<div class="col-md-3">
-									<div class="metric">
-										<span class="icon"><i class="fa fa-eye"></i></span>
-										<p>
-											<span class="number">274,678</span>
-											<span class="title">Visits</span>
-										</p>
-									</div>
-								</div>
-								<div class="col-md-3">
+								<div class="col-md-6">
 									<div class="metric">
 										<span class="icon"><i class="fa fa-bar-chart"></i></span>
 										<p>
-											<span class="number">35%</span>
-											<span class="title">Conversions</span>
+											<?php 
+												$ocorrencia = new Ocorrencia;
+												$total = $ocorrencia->contarNumOcorrencias();
+												$totalPorMotorista = $ocorrencia->contarNumOcorrenciasPorMotorista($_SESSION['IDMOTORISTA']);
+											?>
+											<span class="title">Número Total de Ocorrências realizadas pelo SADI: </span>
+											<span class="number"><?php echo $total ?></span>
+										</p>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="metric">
+										<span class="icon"><i class="fa fa fa-bar-chart"></i></span>
+										<p>
+											<span class="title">Número Total de Ocorrência(s) Que Você Estava: </span>
+											<span class="number"><?php echo $totalPorMotorista ?></span>
+											
 										</p>
 									</div>
 								</div>
 							</div>
+							<div class="row">
+									<div class="col-md-6">
+										<div class="metric">
+											<span class="icon"><i class="fa fa-eye"></i></span>
+											<p>
+												<span class="number">274,678</span>
+												<span class="title">Visits</span>
+											</p>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="metric">
+											<span class="icon"><i class="fa fa-bar-chart"></i></span>
+											<p>
+												<span class="number">35%</span>
+												<span class="title">Conversions</span>
+											</p>
+										</div>
+									</div>
+								</div>	
 							<div class="row">
 								<!--<div class="col-md-9">
 									<div id="headline-chart" class="ct-chart"></div>
@@ -222,19 +231,7 @@
 			animate: 800
 		});
 
-		var updateInterval = 3000; // in milliseconds
-
-		setInterval(function() {
-			var randomVal;
-			randomVal = getRandomInt(0, 100);
-
-			sysLoad.data('easyPieChart').update(randomVal);
-			sysLoad.find('.percent').text(randomVal);
-		}, updateInterval);
-
-		function getRandomInt(min, max) {
-			return Math.floor(Math.random() * (max - min + 1)) + min;
-		}
+		
 
 	});
 	</script>

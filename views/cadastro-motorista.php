@@ -17,9 +17,14 @@
 									}else if(isset($_SESSION['success'])){
 										echo $_SESSION['success'];
 										unset($_SESSION['success']);
+
 									}else if(isset($_SESSION['camposEmBranco'])){
 										echo $_SESSION['camposEmBranco'];
 										unset($_SESSION['camposEmBranco']);
+										
+									}else if(isset($_SESSION['permissaoNegada'])){
+										echo $_SESSION['permissaoNegada'];
+										unset($_SESSION['permissaoNegada']);
 									}
 								?>
 					</p>
@@ -38,7 +43,12 @@
 									<br>
 									<input type="password" name="senha"  class="form-control" placeholder="**********"  required>
 									<br>
-									<button class="btn btn-success btn-block">Enviar</button>
+									<div class="form-check form-check-inline">									
+													<input class="form-check-input" type="checkbox" name="adm" id="inlineCheckbox1" value="1">
+													<label class="form-check-label" for="inlineCheckbox1">Administrador</label><br>
+									</div> 
+									<br>
+									<button class="btn btn-success btn-block" name="cadastrar_motorista">Enviar</button>
 								</div>
 							</div>
 							</form>	

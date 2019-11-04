@@ -2,7 +2,8 @@
     require_once '../../classes/Paciente.php';
     require_once '../../classes/Endereco.php';
 
-    if(isset($_POST['btn-update']))
+    if(isset($_POST['btn-update']) && is_numeric($_POST['id_paciente']) && $_POST['NomePaciente_update'] != '' &&
+     $_POST['cartao_sus_update'] != '')
     {
         $paciente =  new Paciente();
         $endereco =  new Endereco();
@@ -28,7 +29,7 @@
 
 
 
-        $paciente->__set('nome', $nome_update);
+        $paciente->__set('nome', ucwords($nome_update));
         $paciente->__set('data_nascimento', $data_nasc_update);
         $paciente->__set('sexo', $sexo_update);
         $paciente->__set('observacao', $observacao_update);
@@ -36,14 +37,19 @@
         $paciente->__set('cartao_sus', $cartao_sus_update);
 
         $endereco->__set('numero', $numero_update);
-        $endereco->__set('bairro', $bairro_update);
-        $endereco->__set('rua', $endereco_update);
+        $endereco->__set('bairro', ucwords($bairro_update));
+        $endereco->__set('rua', ucwords($endereco_update));
         $endereco->__set('estado', $estado_update);
-        $endereco->__set('cidade', $cidade_update);
+        $endereco->__set('cidade', ucwords($cidade_update));
 
         $paciente->editar($id_paciente);
         $endereco->editar($id_endereco);
 
+            
+        header("location: ../../views/relatorios.php");
+    }else{
+        session_start();
+        $_SESSION['ErrorEditarRegistro'] = "Erro ao Editar Registro. Campos Obrigatórios Não Foram Preenchidos(Nome do Paciente, Cartão Sus)";
         header("location: ../../views/relatorios.php");
     }
 

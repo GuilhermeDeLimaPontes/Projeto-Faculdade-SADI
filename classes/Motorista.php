@@ -6,6 +6,7 @@ class Motorista extends Conexao
     private $nome;
     private $email;
     private $senha;
+    private $isAdmin;
 
     public function __get($atributo)
     {   
@@ -30,11 +31,12 @@ class Motorista extends Conexao
             $_SESSION['emailJaCadastrado'] = "Email já existente";
             return false;
         }else{
-            $sql = "INSERT INTO motorista(nome, email, senha) VALUES(:nome,:email, :senha)";
+            $sql = "INSERT INTO motorista(nome, email, senha, isAdmin) VALUES(:nome,:email, :senha, :isAdmin)";
             $stmt = $this->db->prepare($sql);
             $stmt->bindValue(":nome", $this->nome);
             $stmt->bindValue(":email", $this->email);
             $stmt->bindValue(":senha", password_hash($this->senha, PASSWORD_DEFAULT));
+            $stmt->bindValue(":isAdmin", $this->isAdmin);
             $stmt->execute();
 
             session_start();
@@ -62,6 +64,7 @@ class Motorista extends Conexao
                 session_start();
                 $_SESSION['IDMOTORISTA'] = $results['IDMOTORISTA'];
                 $_SESSION['NOME'] = $results['NOME'];
+                $_SESSION['isAdmin'] = intval($results['isAdmin']);
                 header("location: ../views/index.php");
                 return true;
             }else{

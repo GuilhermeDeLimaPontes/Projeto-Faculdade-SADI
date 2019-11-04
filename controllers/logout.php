@@ -4,6 +4,7 @@
     session_start();
     $_SESSION['IDMOTORISTA'] = NULL;
     $_SESSION['NOME'] = NULL;
+    $_SESSION['isAdmin'] = NULL;
     header("location: ../views/page-login.php");
     exit;
 }

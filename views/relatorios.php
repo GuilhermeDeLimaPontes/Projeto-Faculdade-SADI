@@ -19,6 +19,10 @@
 									}else if(isset($_SESSION['Warning'])){
 										echo $_SESSION['Warning'];
 										unset($_SESSION['Warning']);
+										
+									}else if(isset($_SESSION['ErrorEditarRegistro'])){
+										echo $_SESSION['ErrorEditarRegistro'];
+										unset($_SESSION['ErrorEditarRegistro']);
 									}
 								?>
 					</p>
@@ -26,28 +30,33 @@
 						<div class="col-md-12">
 							<!-- TABLE HOVER -->
 							<div class="panel">
-							  <div class="col-md-4">
-							  <div class="panel-heading">
-									<a href="cadastro-relatorio.php" class="btn btn-success">Registrar Atendimento</a>
-								</div>
-							  </div>
-							  <form class="navbar-form navbar-right" method="GET" action="relatorios.php?search=<?php echo $_GET['search'] ?>" >
-								<div class="col-md-8 col-sm-12">
-										<div class="input-group">
-											<?php 
-							
-												  $stringPesquisa = (!empty($_GET['search'])) ? $_GET['search'] : '';
-												  $stringPesquisa = filter_input(INPUT_GET, 'search', FILTER_SANITIZE_SPECIAL_CHARS);
-												  		
-											?>
+							  <div class="row"> 
+							  	<div class="col-md-3 d-none d-sm-block">
+								  	<div class="panel-heading">
+										<a href="cadastro-relatorio.php" class="btn btn-success btn-sm">Registrar Atendimento</a>
+									</div>
+							 	</div>
+							  	<div class="col-md-9">
+								  <form class="navbar navbar-right" style="margin-top: 15px;" method="GET" action="relatorios.php?search=<?php !isset($_GET['search'])? '': $_GET['search'] ?>" >
+									<div class="col-md-8 col-sm-12">
+											<div class="input-group">
+												<?php 
+								
+													  $stringPesquisa = (!empty($_GET['search'])) ? $_GET['search'] : '';
+													  $stringPesquisa = filter_input(INPUT_GET, 'search', FILTER_SANITIZE_SPECIAL_CHARS);
+													  		
+												?>
 
-											<input type="text" name="search" value="<?php echo  $stringPesquisa ?>" class="form-control" placeholder="Nome ou RG ou Cartão SUS">
-											<span class="input-group-btn"><button type="submit" class="btn btn-primary">Pesquisar</button></span>
-										</div>
+												<input type="text" name="search" value="<?php echo  $stringPesquisa ?>" class="form-control" placeholder="Nome,RG ou Cartão SUS">
+												<span class="input-group-btn"><button type="submit" class="btn btn-dark">Pesquisar</button></span>
+											</div>
+									</div>
+								  </form>
 								</div>
-							  </form>	
+							  </div>	
 								<div class="panel-body">
-									<table class="table table-hover">
+									<div class="table-responsive table-responsive-sm"> 
+									<table class="table">
 										<thead>
 											<tr>
 												<th>#</th>
@@ -56,7 +65,7 @@
                                                 <th>Sexo</th>
                                                 <th>RG</th>
                                                 <th>Cartão SUS</th>
-                                                <th width="310px">Ações</th>
+                                                <th width="250px">Ações</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -67,6 +76,7 @@
 												$dados = $paciente->listar();
 												if(!isset($_GET['search']))
 												{
+							
 													if(count($dados) > 0)
 													{
 														for ($i=0; $i < count($dados) ; $i++) 
@@ -85,8 +95,8 @@
 												  	<?php $id = $ocorrencia->pegarIdOcorrenciaPorPaciente($dados[$i]['IDPACIENTE']); ?>
 														<td>
 																<a href="update_paciente.php?id_update=<?php echo $dados[$i]['IDPACIENTE'] ?>&id_endereco_update=<?php echo $dados[$i]['FK_ID_ENDERECO']?>" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Editar</a> 
-                                                                <a href="#" class="btn btn-danger btn-sm" ><i class="fa fa-trash"></i> Excluir</a>
-                                                                <a href="../registro-atendimento-pdf/registro-atendimento.php?id_paciente=<?php echo $dados[$i]['IDPACIENTE'] ?>&id_ocorrencia=<?php echo $id ?>" target="_blank" class="btn btn-success btn-sm" ><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Relatório</a>
+                                                               <!-- <a href="#" class="btn btn-danger btn-sm" ><i class="fa fa-trash"></i> Excluir</a>-->
+                                                                <a href="../registro-atendimento-pdf/registro-atendimento.php?id_paciente=<?php echo $dados[$i]['IDPACIENTE'] ?>&id_ocorrencia=<?php echo $id ?>" target="_blank" class="btn btn-danger btn-sm" ><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Relatório</a>
 														</td>
 
 														<?php echo "</tr>";
@@ -112,27 +122,22 @@
 												  	<?php $id = $ocorrencia->pegarIdOcorrenciaPorPaciente($pesquisa[$i]['IDPACIENTE']); ?>
 														<td>
 																<a href="update_paciente.php?id_update=<?php echo $pesquisa[$i]['IDPACIENTE'] ?>&id_endereco_update=<?php echo $pesquisa[$i]['FK_ID_ENDERECO']?>" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Editar</a> 
-                                                                <a href="#" class="btn btn-danger btn-sm" ><i class="fa fa-trash"></i> Excluir</a>
+                                                                <!--<a href="#" class="btn btn-danger btn-sm" ><i class="fa fa-trash"></i> Excluir</a>-->
                                                                 <a href="../registro-atendimento-pdf/registro-atendimento.php?id_paciente=<?php echo $pesquisa[$i]['IDPACIENTE'] ?>&id_ocorrencia=<?php echo $id ?>" target="_blank" class="btn btn-success btn-sm" ><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Relatório</a>
 														</td>
 
 														<?php echo "</tr>";
 														}
 													}else{
-														echo '<h4 class="lead text-left text-danger">Paciente não encontrado</h4>';
+														echo '<h4 class="lead text-center text-danger">Paciente não encontrado</h4>';
 													}
 												}
 											?>
 										</tbody>
 									</table>
-									<nav aria-label="...">
-								<ul class="pagination pagination-sm">
-									<li class="page-item"><a class="page-link" href="#" >1</a></li>
-									
-								</ul>
-							</nav>
+									</div>
 								</div>
-								
+								</div>
 							</div>
 							<!-- END TABLE HOVER -->
 						</div>

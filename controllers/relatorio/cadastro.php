@@ -8,7 +8,7 @@
     
     
 
-    if(isset($_POST['cadastrar']))
+    if(isset($_POST['cadastrar']) && $_POST['NomePaciente'] != '' && $_POST['cartao_sus'] != '')
     { 
 
             //tratamento dos inputs Endereço
@@ -53,19 +53,19 @@
                 $ocorrencia_motorista = new Ocorrencia_Motorista();
         
                 $endereco_paciente->__set('numero', $numero);
-                $endereco_paciente->__set('bairro', $bairro);
-                $endereco_paciente->__set('rua', $endereco);
-                $endereco_paciente->__set('cidade', $cidade);
+                $endereco_paciente->__set('bairro', ucwords($bairro));
+                $endereco_paciente->__set('rua', ucwords($endereco));
+                $endereco_paciente->__set('cidade', ucwords($cidade));
                 $endereco_paciente->__set('estado', $estado);
                 
 
-                $origem->__set('nome_solicitante',$nome_solicitante);
+                $origem->__set('nome_solicitante',ucwords($nome_solicitante));
                 $origem->__set('hora_comunicacao',$hora_comunicacao);
                 $origem->__set('solicitamento',$solicitamento);
                 $origem->__set('data_fato', $data_fato);
                 
                 
-                $paciente->__set('nome',$nome_paciente);
+                $paciente->__set('nome',ucwords($nome_paciente));
                 $paciente->__set('data_nascimento',$data_nascimento);
                 $paciente->__set('sexo',$sexo);
                 $paciente->__set('observacao',$observacao);
@@ -73,14 +73,14 @@
                 $paciente->__set('cartao_sus',$cartao_sus);
                 $paciente->__set('fk_id_endereco', $endereco_paciente->getLastIdEndereco());
             
-                $ocorrencia->__set('destino',$destino);
+                $ocorrencia->__set('destino',ucwords($destino));
                 $ocorrencia->__set('hora_final',$hora_final);
                 $ocorrencia->__set('hora_fato',$hora_fato);
                 $ocorrencia->__set('hora_local',$hora_local);
                 $ocorrencia->__set('km_inicial',$km_inicial);
                 $ocorrencia->__set('km_rodado',$km_rodado);
                 $ocorrencia->__set('km_final',$km_final);
-                $ocorrencia->__set('prefixo_amb',$amb);
+                $ocorrencia->__set('prefixo_amb',ucwords($amb));
                 $ocorrencia->__set('nat_ocorrencia',$natureza_ocorrencia);
                 $ocorrencia->__set('ra',$ra);
                 $ocorrencia->__set('fk_id_paciente',$paciente->getLastIdPaciente());
@@ -123,9 +123,14 @@
                     }
                     
                 }
-
+                session_start();
+                $_SESSION['SuccessCadastroRegistro'] = "O Registro de Atendimento Foi Cadastrado Com Sucesso";
                 header("location: ../../views/cadastro-relatorio.php");
 
+     }else{
+        session_start();
+        $_SESSION['ErrorCadastroRegistro'] = "Campos Obrigatórios Não Foram Preenchidos(Nome do Paciente, Cartão Sus)";
+        header("location: ../../views/cadastro-relatorio.php");
      }
 
 ?>

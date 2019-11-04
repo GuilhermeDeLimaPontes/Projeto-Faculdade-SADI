@@ -1,6 +1,7 @@
 		<?php
 			require_once 'header.php';
-			require_once '../classes/Motorista.php'
+			require_once '../classes/Motorista.php';
+			
 		?>
 		<!-- MAIN -->
 		<div class="main">
@@ -28,10 +29,11 @@
 						<div class="col-md-12">
 							<!-- TABLE HOVER -->
 							<div class="panel">
-								<div class="panel-heading">
-									<a href="cadastro-motorista.php" class="btn btn-success">Cadastrar Motorista</a>
+								<div class="panel-heading ">
+									<a href="cadastro-motorista.php" class="btn btn-success btn-sm">Cadastrar Motorista</a>
 								</div>
 								<div class="panel-body">
+									<div class="table-responsive table-responsive-sm">
 									<table class="table table-hover">
 										<thead>
 											<tr>
@@ -68,6 +70,7 @@
 											?>
 										</tbody>
 									</table>
+								</div>
 								</div>
 							</div>
 							<!-- END TABLE HOVER -->

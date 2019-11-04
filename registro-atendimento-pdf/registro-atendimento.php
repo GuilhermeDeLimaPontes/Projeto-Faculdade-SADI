@@ -97,8 +97,9 @@
 
         /*Dados do atendimento */
         $pdf->SetFillColor(211,211,211);
-        $pdf->SetFont('Arial','B',7.5);
+        $pdf->SetFont('Arial','B',8);
         $pdf->Cell(0,7,"DADOS DO ATENDIMENTO",1,1,'C',1);
+        $pdf->SetFont('Arial','B',7.5);
         $pdf->Cell($width_cell_Dados_Atendimento[0],10,"NATUREZA DA OCORRÊNCIA: $natureza_ocorrencia",1,'C');
         $pdf->Cell($width_cell_Dados_Atendimento[1],10,"PREFIXO DA AMB: $prefixo_amb",1,'C');
         $pdf->Cell($width_cell_Dados_Atendimento[2],10,"RA Nº: $ra",1,'C');

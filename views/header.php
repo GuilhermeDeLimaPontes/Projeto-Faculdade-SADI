@@ -9,7 +9,7 @@
 	<title>Sadi | Serviço de Atendimento Domiciliar de Itapeva</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<!-- VENDOR CSS -->
 	<link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.min.css">
@@ -21,9 +21,12 @@
 	<link rel="stylesheet" href="assets/css/demo.css">
 	<!-- GOOGLE FONTS -->
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+	
+	
 	<!-- ICONS -->
 	<link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
 	<link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon.png">
+	
 </head>
 
 <body>
@@ -73,7 +76,7 @@
 						<li><a href="index.php" class=""><i class="lnr lnr-home"></i> <span>Página Inicial</span></a></li>
 						<li><a href="cadastro-relatorio.php" class=""><i class="lnr lnr-code"></i> <span>Registrar Atendimento</span></a></li>
 						<li><a href="cadastro-motorista.php" class=""><i class="lnr lnr-code"></i> <span>Cadastrar Motorista</span></a></li>
-						<li><a href="funcionarios.php" class=""><i class="lnr lnr-dice"></i> <span>Listar Mototistas</span></a></li>
+						<li><a href="funcionarios.php" class=""><i class="lnr lnr-dice"></i> <span>Listar Motoristas</span></a></li>
 						<li><a href="relatorios.php" class=""><i class="lnr lnr-dice"></i> <span>Listar Pacientes</span></a></li>
 						<li><a href="../controllers/logout.php?logout=1" class=""><i class="lnr lnr-dice"></i> <span>Sair</span></a></li>
 						

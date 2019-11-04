@@ -59,21 +59,6 @@ Class Ocorrencia extends Conexao{
         }
     }
 
-    public function listar()
-    {
-
-    }
-
-    public function editar($id)
-    {
-
-    }
-
-    public function excluir($id)
-    {
-
-    }
-
     public function getLastIdOcorrencia()
     {
         
@@ -152,6 +137,37 @@ Class Ocorrencia extends Conexao{
             return $results;
         }else{
             return array();
+        }
+    }
+
+    public function contarNumOcorrencias()
+    {
+        $sql = "SELECT COUNT(IDOCORRENCIA) as numTotal FROM ocorrencia";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        
+        if($stmt->rowCount() > 0)
+        {
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return intval($result['numTotal']);
+        }else{
+            return array('0');
+        }
+    }
+
+    public function contarNumOcorrenciasPorMotorista($id)
+    {
+        $sql = "SELECT COUNT(ID_OCORRENCIA) as num FROM ocorrencia_motorista WHERE ID_MOTORISTA = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+
+        if($stmt->rowCount() > 0)
+        {
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return intval($result['num']);
+        }else{
+            return array('0');
         }
     }
 }

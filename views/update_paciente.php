@@ -18,6 +18,8 @@
 							<div class="panel">
 								<div class="panel-heading">
 									<h3 class="panel-title">Alterar dados do Paciente</h3>
+									<p class="lead text-center text-primary pt-2 pb-2">
+									</p>
 											<?php 
 												if(isset($_GET['id_update']) && isset($_GET['id_endereco_update']))
 												{
@@ -25,11 +27,7 @@
 													$endereco = new Endereco();
 													$dados = $paciente->pegarDadosPorId($_GET['id_update']);
 													$dadosEndereco = $endereco->pegarDadosPorId($_GET['id_endereco_update']);
-
-							
-												}else{
-													header("location: update_paciente.php");
-												}			
+												}	
 											?>
 								</div>
 							<div class="panel-body">

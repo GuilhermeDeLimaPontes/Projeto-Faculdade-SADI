@@ -8,6 +8,21 @@
 		<div class="main-content">
 			<div class="container-fluid">
 				<h3 class="page-title">Registrar Atendimento</h3>
+				<p class="lead text-center text-primary pt-2 pb-2">
+								<?php
+									if(isset($_SESSION['SuccessCadastroRegistro']))
+									{
+
+										echo $_SESSION['SuccessCadastroRegistro'];
+										unset($_SESSION['SuccessCadastroRegistro']);
+									
+									}else if(isset($_SESSION['ErrorCadastroRegistro']))
+									{
+										echo $_SESSION['ErrorCadastroRegistro'];
+										unset($_SESSION['ErrorCadastroRegistro']);
+									}
+								?>
+					</p>
 				<div class="row">
 					<div class="col-md-12">
 							<!-- BUTTONS -->
@@ -24,14 +39,14 @@
 										  <div class="form-row">
 										    <div class="form-group col-md-12">
 										      <label for="NomeSolicitante">Nome do Solicitante</label>
-										      <input type="text" name="NomeSolicitante" class="form-control" id="NomeSolicitante" placeholder="Nome Do Solicitante" required>
+										      <input type="text" name="NomeSolicitante" class="form-control" id="NomeSolicitante" placeholder="Nome Do Solicitante" >
 										    </div>
 										  </div>
 
 										  <div class="form-row">
 										    <div class="form-group col-md-4">
 										      <label for="dataFato">Data do Fato</label>
-										      <input type="date" name="dataFato" class="form-control" id="dataFato" max="2099-12-25">
+										      <input type="date" name="dataFato" class="form-control" id="dataFato">
 										    </div>
 										    <div class="form-group col-md-4">
 										      <label for="HoraComunicacao">Hora da Comunicação</label>
@@ -91,18 +106,18 @@
 										  <div class="form-row">
 										    <div class="form-group col-md-8">
 										      <label for="NomePaciente">Nome do Paciente</label>
-										      <input type="text" name="NomePaciente" class="form-control" id="NomePaciente" placeholder="Nome">
+										      <input type="text" name="NomePaciente" class="form-control" id="NomePaciente" placeholder="Nome" required>
 										    </div>
 										    <div class="form-group col-md-4">
 										      <label for="RG">RG</label>
-										      <input type="text" name="rg" class="form-control" id="RG" placeholder="RG">
+										      <input type="text" name="rg" class="form-control" id="RG"  placeholder="RG"  maxlength="15">
 										    </div>
 										  </div>
 
 										  	<div class="form-row">
 											    <div class="form-group col-md-4">
 											      <label for="Cartão SUS">Cartão SUS</label>
-											      <input type="text" name="cartao_sus" class="form-control" id="Cartão SUS">
+											      <input type="text" name="cartao_sus" class="form-control" id="Cartão SUS" maxlength="22" required>
 												</div>
 											    <div class="form-check  col-md-4">
 													<label for="sexo">Sexo</label>
@@ -127,7 +142,7 @@
 											</div>
 											<div class="form-group col-md-2">
 												<label for="numero">Número</label>
-												<input type="number" name="numero" class="form-control" id="numero" placeholder="numero">
+												<input type="number" name="numero" class="form-control" min="1" id="numero" placeholder="numero">
 											</div>
 										 </div>	
 										  <div class="form-row">
@@ -135,14 +150,14 @@
 										      <label for="cidade">Cidade</label>
 										      <input type="text" name="cidade" class="form-control" id="cidade">
 										    </div>
-										    <div class="form-group col-md-4">
+										    <div class="form-group col-md-2">
 										      <label for="estado">Estado</label>
 										      <select id="estado" name="estado" class="form-control">
 										        <option selected>Escolher...</option>
 										        <option value="SP">SP</option>
 										      </select>
 										    </div>
-										    <div class="form-group col-md-2">
+										    <div class="form-group col-md-4">
 										      <label for="bairro">BAIRRO</label>
 										      <input type="text" name="bairro" class="form-control" id="bairro">
 										    </div>
@@ -162,8 +177,8 @@
 										  	</div>
 
 										  <div class="form-row">
-										    <div class="form-group col-md-12">
-												<h4 class="text-center">Integrantes da Equipe</h4>
+										    <div class="form-group col-md-12 ">
+												<h4 class="text-center" style="border-top: 1px solid #e5e5e5; padding-top: 10px;" >Integrantes da Equipe</h4>
 												<div class="form-check form-check-inline">
 												
 												<?php
