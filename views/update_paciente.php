@@ -42,7 +42,7 @@
 										    </div>
 										    <div class="form-group col-md-4">
 										      <label for="RG">RG</label>
-										      <input type="text" name="rg_update" class="form-control" id="RG" placeholder="RG" value="<?php echo $dados['RG']?>">
+										      <input type="text" name="rg_update" class="form-control" id="rg_update" placeholder="RG" value="<?php echo $dados['RG']?>">
 										    </div>
 										  </div>
 
@@ -88,13 +88,13 @@
 										      <label for="cidade">Cidade</label>
 										      <input type="text" name="cidade_update" class="form-control" id="cidade" value="<?php echo $dadosEndereco['CIDADE']?>">
 										    </div>
-										    <div class="form-group col-md-4">
+										    <div class="form-group col-md-2">
 										      <label for="estado">Estado</label>
 										      <select id="estado" name="estado_update" class="form-control">
 										        <option value="SP">SP</option>
 										      </select>
 										    </div>
-										    <div class="form-group col-md-2">
+										    <div class="form-group col-md-4">
 										      <label for="bairro">BAIRRO</label>
 										      <input type="text" name="bairro_update" class="form-control" id="bairro" value="<?php echo $dadosEndereco['BAIRRO']?>">
 										    </div>
@@ -133,6 +133,13 @@
 	<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 	<script src="assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 	<script src="assets/scripts/klorofil-common.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"></script>
+	<script>
+		$(document).ready(function(){
+			$('#cartao_sus_update').mask('000.0000.0000.0000');
+			$('#rg_update').mask('00.000.000-0');
+		});
+	</script>
 </body>
 
 </html>

@@ -119,24 +119,31 @@ Class Paciente extends Conexao {
             return $results = array();
         }
     }
-
-    public function paginacao($inicio = 1, $itemPorPage = 10)
+    public function contarQtdTotalDePacientes()
     {
-        $page = ($inicio - 1) * $itemPorPage;
-
-        $sql = "SELECT IDPACIENTE, FK_ID_ENDERECO, NOME,DATA_NASCIMENTO,SEXO,RG,CARTAO_SUS FROM paciente order by IDPACIENTE LIMIT :inicio, :itensporpage";
+        $sql = "SELECT COUNT(IDPACIENTE) AS numTotal from paciente";
         $stmt = $this->db->prepare($sql);
-        $stmt->bindValue(":inicio", $page);
-        $stmt->bindValue(":itensporpage", $itemPorPage);
         $stmt->execute();
-
-        return array(
-                        'dados'=>$stmt->fetchAll(PDO::FETCH_ASSOC),
-                        'numLinhas'=>$stmt->rowCount()
-                    );
         
+        if($stmt->rowCount() > 0)
+        {
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return intval($result['numTotal']);
+        }else{
+            return array('0');
+        }
+    }
+    public function paginacao($inicio, $itemPorPage)
+    {
+        $sql = "SELECT IDPACIENTE, FK_ID_ENDERECO, NOME,DATA_NASCIMENTO,SEXO,RG,CARTAO_SUS FROM paciente order by IDPACIENTE LIMIT ?, ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(1, $inicio, PDO::PARAM_INT);
+        $stmt->bindValue(2, $itemPorPage, PDO::PARAM_INT);
+        $stmt->execute();
+        $dados = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-
+        return $dados;
+                        
     }
 
     public function pesquisar($search)

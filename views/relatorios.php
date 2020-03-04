@@ -25,7 +25,7 @@
 										unset($_SESSION['ErrorEditarRegistro']);
 									}
 								?>
-					</p>
+					</p>		
 					<div class="row">
 						<div class="col-md-12">
 							<!-- TABLE HOVER -->
@@ -72,17 +72,49 @@
 											<?php 
 												$paciente = new Paciente();
 												$ocorrencia = new Ocorrencia();
+
+												define('QTDE_REGISTROS', 10);   
+ 												define('RANGE_PAGINAS', 1);
+												$pagina_atual = (isset($_GET['page']) && is_numeric($_GET['page'])) ? $_GET['page'] : 1;
+												$linha_inicial = ($pagina_atual -1) * QTDE_REGISTROS; 
+												$dadosPaginacao = $paciente->paginacao($linha_inicial, QTDE_REGISTROS);
+
+												$sqlContador = $paciente->contarQtdTotalDePacientes();
+												
+												/* Idêntifica a primeira página */  
+												$primeira_pagina = 1;   
+												
+												/* Cálcula qual será a última página */  
+												$ultima_pagina  = ceil($sqlContador/ QTDE_REGISTROS);   
+												
+												/* Cálcula qual será a página anterior em relação a página atual em exibição */   
+												$pagina_anterior = ($pagina_atual > 1) ? $pagina_atual -1 : "" ;   
+												
+												/* Cálcula qual será a pŕoxima página em relação a página atual em exibição */   
+												$proxima_pagina = ($pagina_atual < $ultima_pagina) ? $pagina_atual +1 : "" ;  
+												
+												/* Cálcula qual será a página inicial do nosso range */    
+												$range_inicial  = (($pagina_atual - RANGE_PAGINAS) >= 1) ? $pagina_atual - RANGE_PAGINAS : 1 ;   
+												
+												/* Cálcula qual será a página final do nosso range */    
+												$range_final   = (($pagina_atual + RANGE_PAGINAS) <= $ultima_pagina ) ? $pagina_atual + RANGE_PAGINAS : $ultima_pagina ;   
+												
+												/* Verifica se vai exibir o botão "Primeiro" e "Pŕoximo" */   
+												$exibir_botao_inicio = ($range_inicial < $pagina_atual) ? 'mostrar' : 'esconder'; 
+												
+												/* Verifica se vai exibir o botão "Anterior" e "Último" */   
+												$exibir_botao_final = ($range_final > $pagina_atual) ? 'mostrar' : 'esconder';
 												
 												$dados = $paciente->listar();
 												if(!isset($_GET['search']))
 												{
 							
-													if(count($dados) > 0)
+													if(count($dadosPaginacao) > 0)
 													{
-														for ($i=0; $i < count($dados) ; $i++) 
+														for ($i=0; $i < count($dadosPaginacao) ; $i++) 
 														{ 
 															echo "<tr>";
-															foreach ($dados[$i] as $k => $v) 
+															foreach ($dadosPaginacao[$i] as $k => $v) 
 															{
 																if($k != "FK_ID_ENDERECO")
 																{
@@ -92,11 +124,11 @@
 															}
 												
 											?>
-												  	<?php $id = $ocorrencia->pegarIdOcorrenciaPorPaciente($dados[$i]['IDPACIENTE']); ?>
+												  	<?php $id = $ocorrencia->pegarIdOcorrenciaPorPaciente($dadosPaginacao[$i]['IDPACIENTE']); ?>
 														<td>
-																<a href="update_paciente.php?id_update=<?php echo $dados[$i]['IDPACIENTE'] ?>&id_endereco_update=<?php echo $dados[$i]['FK_ID_ENDERECO']?>" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Editar</a> 
+																<a href="update_paciente.php?id_update=<?php echo $dadosPaginacao[$i]['IDPACIENTE'] ?>&id_endereco_update=<?php echo $dadosPaginacao[$i]['FK_ID_ENDERECO']?>" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Editar</a> 
                                                                <!-- <a href="#" class="btn btn-danger btn-sm" ><i class="fa fa-trash"></i> Excluir</a>-->
-                                                                <a href="../registro-atendimento-pdf/registro-atendimento.php?id_paciente=<?php echo $dados[$i]['IDPACIENTE'] ?>&id_ocorrencia=<?php echo $id ?>" target="_blank" class="btn btn-danger btn-sm" ><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Relatório</a>
+                                                                <a href="../registro-atendimento-pdf/registro-atendimento.php?id_paciente=<?php echo $dadosPaginacao[$i]['IDPACIENTE'] ?>&id_ocorrencia=<?php echo $id ?>" target="_blank" class="btn btn-danger btn-sm" ><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Relatório</a>
 														</td>
 
 														<?php echo "</tr>";
@@ -133,9 +165,35 @@
 													}
 												}
 											?>
+											
 										</tbody>
+										
 									</table>
+									<div class='box-paginacao'>     
+												     
+									<ul class="pagination">
+												<?php if(isset($_GET['page']) && $_GET['page'] != 1){ ?>
+													<li class="page-item"><a class='page-link <?=$exibir_botao_inicio?>' href="http://localhost/sadi/views/relatorios.php?page=<?=$pagina_anterior?>" title="Página Anterior">Anterior</a></li>
+									</ul>
+												<?php  } ?>
+												<?php
+												  
+												/* Loop para montar a páginação central com os números */   
+												for ($i=$range_inicial; $i <= $range_final; $i++):   
+													$destaque = ($i == $pagina_atual) ? 'destaque' : '' ;  
+												?>
+												<ul class="pagination justify-content-center">   
+													<li class="page-item"><a class='page-link <?=$destaque?>' href="http://localhost/sadi/views/relatorios.php?page=<?=$i?>"><?=$i?></a></li>
+												</ul>    
+												<?php endfor; ?>
+												<?php if(isset($_GET['page']) && $_GET['page'] != $range_final){ ?>
+												<ul class="pagination">
+													<li class="page-item"><a class='page-link <?=$exibir_botao_final?>' href="http://localhost/sadi/views/relatorios.php?page=<?=$proxima_pagina?>" title="Próxima Página">Próxima</a></li>
+												</ul>
+												<?php  } ?>    
+    										 </div>  
 									</div>
+									
 								</div>
 								</div>
 							</div>
@@ -159,6 +217,7 @@
 	<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 	<script src="assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 	<script src="assets/scripts/klorofil-common.js"></script>
+
 </body>
 
 </html>

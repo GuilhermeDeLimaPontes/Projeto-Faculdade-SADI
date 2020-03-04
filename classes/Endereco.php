@@ -75,11 +75,6 @@ Class Endereco extends Conexao{
         }
     }
 
-    public function listar()
-    {
-
-    }
-
     public function editar($id)
     {
         $sql = "UPDATE endereco SET 
@@ -102,11 +97,6 @@ Class Endereco extends Conexao{
             session_start();
             $_SESSION['Warning'] = "Erro ao Alterar. Tente Novamente Mais Tarde";
         }
-
-    }
-
-    public function excluir($id)
-    {
 
     }
 }

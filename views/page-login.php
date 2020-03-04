@@ -35,7 +35,7 @@
 			<div class="vertical-align-middle">
 				<div class="auth-box ">
 					<div class="left">
-						<div class="content">
+						<div class="content">					
 							<div class="header">
 								<div class="logo text-center"><img src="assets/img/logo-dark.png" alt="Klorofil Logo"></div>
 								<p class="lead">Login to your account</p>
@@ -43,11 +43,11 @@
 							<form class="form-auth-small" action="../controllers/AuthLogin.php" method="POST">
 								<div class="form-group">
 									<label for="signin-email" class="control-label sr-only">Email</label>
-									<input type="email" class="form-control" name="email" id="signin-email" value="" placeholder="Email" >
+									<input type="email" class="form-control" name="email" id="signin-email" placeholder="Email" value="<?php if(isset($_SESSION['email_retry'])){ echo $_SESSION['email_retry']; }else{ echo "";}  ?>">
 								</div>
 								<div class="form-group">
 									<label for="signin-password" class="control-label sr-only">Password</label>
-									<input type="password" class="form-control" name="password" id="signin-password" value="" placeholder="Password">
+									<input type="password" class="form-control" name="password" id="signin-password" value="" required placeholder="Password">
 								</div>
 								<div class="form-group clearfix">
 									<label class="fancy-checkbox element-left">

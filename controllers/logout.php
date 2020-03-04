@@ -2,9 +2,10 @@
 
     if(isset($_GET['logout']) && $_GET['logout'] == 1){
     session_start();
-    $_SESSION['IDMOTORISTA'] = NULL;
-    $_SESSION['NOME'] = NULL;
-    $_SESSION['isAdmin'] = NULL;
+    unset($_SESSION['IDMOTORISTA']);
+    unset($_SESSION['NOME']);
+    unset($_SESSION['isAdmin']);
+    
     header("location: ../views/page-login.php");
     exit;
 }

@@ -110,14 +110,14 @@
 										    </div>
 										    <div class="form-group col-md-4">
 										      <label for="RG">RG</label>
-										      <input type="text" name="rg" class="form-control" id="RG"  placeholder="RG"  maxlength="15">
+										      <input type="text" name="rg" class="form-control" id="rg"  placeholder="RG"  maxlength="15">
 										    </div>
 										  </div>
 
 										  	<div class="form-row">
 											    <div class="form-group col-md-4">
 											      <label for="Cartão SUS">Cartão SUS</label>
-											      <input type="text" name="cartao_sus" class="form-control" id="Cartão SUS" maxlength="22" required>
+											      <input type="text" name="cartao_sus" class="form-control" id="cartao_sus" maxlength="22" required>
 												</div>
 											    <div class="form-check  col-md-4">
 													<label for="sexo">Sexo</label>
@@ -239,6 +239,13 @@
 	<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 	<script src="assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 	<script src="assets/scripts/klorofil-common.js"></script>
-</body>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"></script>
+	<script>
+		$(document).ready(function(){
+			$('#cartao_sus').mask('000.0000.0000.0000');
+			$('#rg').mask('00.000.000-0');
+		});
+	</script>
+	
 
 </html>

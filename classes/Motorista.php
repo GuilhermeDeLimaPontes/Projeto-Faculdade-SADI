@@ -61,15 +61,20 @@ class Motorista extends Conexao
             
             if(password_verify($this->senha, $hash))
             { 
+                session_destroy();
                 session_start();
+                session_regenerate_id();
+                
                 $_SESSION['IDMOTORISTA'] = $results['IDMOTORISTA'];
                 $_SESSION['NOME'] = $results['NOME'];
                 $_SESSION['isAdmin'] = intval($results['isAdmin']);
+                unset($_SESSION['email_retry']);
                 header("location: ../views/index.php");
                 return true;
             }else{
                 session_start();
                 $_SESSION['loginErro'] = "Login ou Senha Inválida";
+            
                 header("location: ../views/page-login.php");
                 exit;
             }
